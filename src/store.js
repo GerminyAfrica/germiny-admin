@@ -35,11 +35,11 @@ const reducer = combineReducers({
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
+  ? JSON.stringify(localStorage.getItem('userInfo'))
   : null
 
   const usertokenFromStorage = localStorage.getItem('token')
-  ? JSON.parse(localStorage.getItem('token'))
+  ? JSON.stringify(localStorage.getItem('token'))
   : null
 
 

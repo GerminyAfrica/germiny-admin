@@ -22,7 +22,8 @@ const PractitionerProfile = ({ match, history }) => {
   const [yearofgrad, setYearOfGrad] = useState('')
   const [yearofhouse, setYearOfHouse] = useState('')
   const [yearofexp, setYearOfExp] = useState('')
-  const [license, setLicense] = useState('')
+  const [licenseNo, setLicenseNo] = useState('')
+  const [licenseExpire, setLicenseExpire] = useState('')
   const [doc, setDoc] = useState([])
   const [wallet, setWallet] = useState('')
   const [totalreject, setTotalReject] = useState('')
@@ -90,7 +91,8 @@ const PractitionerProfile = ({ match, history }) => {
         setYearOfGrad(practitioner.yearOfGrad)
         setYearOfHouse(practitioner.yearOfHouse)
         setYearOfExp(practitioner.yearOfExp)
-        setLicense(practitioner.license)
+        setLicenseNo(practitioner.licenseNo)
+        setLicenseExpire(practitioner.licenseExpire.split("T")[0])
         setDoc(practitioner.doc)
         setWallet(practitioner.wallet)
         setTotalReject(practitioner.totalReject)
@@ -285,8 +287,6 @@ const PractitionerProfile = ({ match, history }) => {
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
-                            </Form.Row>
-                            <Form.Row>
                                 <Col>
                                     <Form.Group controlId='displayname'>
                                         <Form.Label>Username</Form.Label>
@@ -430,8 +430,6 @@ const PractitionerProfile = ({ match, history }) => {
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
-                            </Form.Row>
-                            <Form.Row>
                                 <Col>
                                     <Form.Group controlId='yearofexp'>
                                         <Form.Label>Years of Experience</Form.Label>
@@ -448,13 +446,26 @@ const PractitionerProfile = ({ match, history }) => {
                                         </InputGroup>
                                     </Form.Group>
                                 </Col>
+                            </Form.Row>
+                            <Form.Row>
                                 <Col>
-                                    <Form.Group controlId='license'>
+                                    <Form.Group controlId='licenseNo'>
                                         <Form.Label>License Number</Form.Label>
                                         <Form.Control
-                                            type='license'
-                                            value={license}
-                                            onChange={(e) => setLicense(e.target.value)}
+                                            type='licenseNo'
+                                            value={licenseNo}
+                                            onChange={(e) => setLicenseNo(e.target.value)}
+                                            readOnly>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId='licenseExpire'>
+                                        <Form.Label>License Expiry Date</Form.Label>
+                                        <Form.Control
+                                            type='licenseExpire'
+                                            value={licenseExpire}
+                                            onChange={(e) => setLicenseExpire(e.target.value)}
                                             readOnly>
                                         </Form.Control>
                                     </Form.Group>

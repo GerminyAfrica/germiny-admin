@@ -350,7 +350,7 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
           </ListItemIcon>
           <ListItemText primary={"Dashboard"} />
         </ListItem>
-        {userInfo && userInfo.role == "admin" && <ListItem button button onClick={() => route("/user")}>
+        {userInfo && userInfo.role === "admin" && <ListItem button button onClick={() => route("/user")}>
           <ListItemIcon>
             <PeopleAlt />
           </ListItemIcon>
@@ -362,7 +362,7 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
           </ListItemIcon>
           <ListItemText primary={"Practitioner"} />
         </ListItem>
-        {userInfo && userInfo.role == "admin" && <ListItem button onClick={() => route("/field")}>
+        {userInfo && userInfo.role === "admin" && <ListItem button onClick={() => route("/field")}>
           <ListItemIcon>
             <LocalHospital />
           </ListItemIcon>
@@ -371,7 +371,7 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
       </List>
       <Divider />
       <List>
-        {userInfo && userInfo.role == "admin" && <ListItem button onClick={() => route("/email")}>
+        {userInfo && userInfo.role === "admin" && <ListItem button onClick={() => route("/email")}>
           <ListItemIcon>
             <InboxIcon/>
           </ListItemIcon>

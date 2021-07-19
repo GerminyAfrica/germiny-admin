@@ -2,6 +2,7 @@ import axios from "axios"
 import { PROFILE_UPDATE_FAIL, PROFILE_UPDATE_REQUEST, PROFILE_UPDATE_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_RESET, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from "../constants/userContants"
 import { PRACT_LIST_RESET } from "../constants/practitionerConstants";
 
+const url =  "https://germiny.dev"
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({
@@ -13,7 +14,7 @@ export const login = (email, password) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const {data} = await axios.post('/api/v1/auth/admin/login', {email, password}, config)
+        const {data} = await axios.post(`${url}/api/v1/auth/admin/login`, {email, password}, config)
     
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -42,7 +43,7 @@ export const getUserDetails = () => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get('/api/v1/auth/admin/profile', config)
+        const {data} = await axios.get(`${url}/api/v1/auth/admin/profile`, config)
         dispatch({
             type: USER_DETAILS_SUCCESS,
             payload: data
@@ -70,7 +71,7 @@ export const userProfileUpdate = (user) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.patch('/api/v1/admin/updateProfile', user,  config)
+        const {data} = await axios.patch(`${url}/api/v1/admin/updateProfile`, user,  config)
         dispatch({
             type: PROFILE_UPDATE_SUCCESS,
             payload: data

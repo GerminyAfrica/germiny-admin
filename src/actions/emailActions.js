@@ -2,6 +2,7 @@ import axios from 'axios'
 import { EMAIL_CREATE_FAIL, EMAIL_CREATE_REQUEST, EMAIL_CREATE_SUCCESS, EMAIL_DELETE_FAIL, EMAIL_DELETE_REQUEST, EMAIL_DELETE_SUCCESS, 
         EMAIL_DETAILS_FAIL, EMAIL_DETAILS_REQUEST, EMAIL_DETAILS_SUCCESS, EMAIL_LIST_FAIL, EMAIL_LIST_REQUEST, EMAIL_LIST_SUCCESS, EMAIL_UPDATE_FAIL, EMAIL_UPDATE_REQUEST, EMAIL_UPDATE_SUCCESS } from '../constants/emailConstants'
 
+const url =  "https://germiny.dev"       
 export const listEmails = () => async (dispatch, getState) =>  {
     try {
         dispatch({type: EMAIL_LIST_REQUEST})
@@ -15,7 +16,7 @@ export const listEmails = () => async (dispatch, getState) =>  {
             }
         }
 
-        const { data } = await axios.get(`/api/v1/admin/email`, config)
+        const { data } = await axios.get(`${url}/api/v1/admin/email`, config)
         dispatch({
             type: EMAIL_LIST_SUCCESS,
             payload:data
@@ -41,7 +42,7 @@ export const deleteEmail = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(`/api/v1/admin/email/${id}`, config)
+        const { data } = await axios.delete(`${url}/api/v1/admin/email/${id}`, config)
         dispatch({
             type: EMAIL_DELETE_SUCCESS,
             payload:data
@@ -69,7 +70,7 @@ export const createEmail = (subject, message) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.post(`/api/v1/admin/email`, {subject,message}, config)
+        const { data } = await axios.post(`${url}/api/v1/admin/email`, {subject,message}, config)
         dispatch({
             type: EMAIL_CREATE_SUCCESS,
             payload:data
@@ -97,7 +98,7 @@ export const getEmailDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(`/api/v1/admin/email/${id}`, config)
+        const {data} = await axios.get(`${url}/api/v1/admin/email/${id}`, config)
         dispatch({
             type: EMAIL_DETAILS_SUCCESS,
             payload: data
@@ -124,7 +125,7 @@ export const updateEmail = (id, subject, message) => async (dispatch, getState) 
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/email/${id}`, {subject, message}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/email/${id}`, {subject, message}, config)
         dispatch({
             type: EMAIL_UPDATE_SUCCESS,
             payload:data

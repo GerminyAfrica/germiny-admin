@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { FIELD_CREATE_FAIL, FIELD_CREATE_REQUEST, FIELD_CREATE_SUCCESS, FIELD_DELETE_FAIL, FIELD_DELETE_REQUEST, FIELD_DELETE_SUCCESS, FIELD_LIST_FAIL, FIELD_LIST_REQUEST, FIELD_LIST_SUCCESS } from '../constants/fieldConstants'
 
+const url =  "https://germiny.dev" 
 export const listFields = () => async (dispatch, getState) =>  {
     try {
         dispatch({type: FIELD_LIST_REQUEST})
@@ -14,7 +15,7 @@ export const listFields = () => async (dispatch, getState) =>  {
             }
         }
 
-        const { data } = await axios.get(`/api/v1/admin/fields/all`, config)
+        const { data } = await axios.get(`${url}/api/v1/admin/fields/all`, config)
         dispatch({
             type: FIELD_LIST_SUCCESS,
             payload:data
@@ -40,7 +41,7 @@ export const deleteField = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(`/api/v1/admin/field/${id}`, config)
+        const { data } = await axios.delete(`${url}/api/v1/admin/field/${id}`, config)
         dispatch({
             type: FIELD_DELETE_SUCCESS,
             payload:data
@@ -68,7 +69,7 @@ export const createField = (name, displayName, practclass) => async (dispatch, g
             }
         }
 
-        const { data } = await axios.post(`/api/v1/admin/field/`, {name, displayName, practclass}, config)
+        const { data } = await axios.post(`${url}/api/v1/admin/field/`, {name, displayName, practclass}, config)
         dispatch({
             type: FIELD_CREATE_SUCCESS,
             payload:data

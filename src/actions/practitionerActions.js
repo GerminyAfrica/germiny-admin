@@ -5,6 +5,7 @@ import { PRACT_LIST_REQUEST, PRACT_LIST_SUCCESS, PRACT_LIST_FAIL, PRACT_DELETE_R
     PRACT_ACTIVATE_FAIL, PRACT_INVITE_SUCCESS, PRACT_INVITE_REQUEST, PRACT_INVITE_FAIL, PRACT_DECLINE_REQUEST, PRACT_DECLINE_SUCCESS, 
     PRACT_DECLINE_FAIL, PRACT_REJECT_REQUEST, PRACT_REJECT_SUCCESS, PRACT_REJECT_FAIL, PRACT_EMAIL_REQUEST, PRACT_EMAIL_SUCCESS, PRACT_EMAIL_FAIL } from "../constants/practitionerConstants";
 
+const url =  "https://germiny.dev"
 export const listPractitioners = () => async (dispatch, getState) =>  {
     try {
         dispatch({type: PRACT_LIST_REQUEST})
@@ -18,7 +19,7 @@ export const listPractitioners = () => async (dispatch, getState) =>  {
             }
         }
 
-        const { data } = await axios.get(`/api/v1/admin/practitioners`, config)
+        const { data } = await axios.get(`${url}/api/v1/admin/practitioners`, config)
         dispatch({
             type: PRACT_LIST_SUCCESS,
             payload:data
@@ -44,7 +45,7 @@ export const deletePractitioner = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(`/api/v1/admin/practitioner/${id}`, config)
+        const { data } = await axios.delete(`${url}/api/v1/admin/practitioner/${id}`, config)
         dispatch({
             type: PRACT_DELETE_SUCCESS,
             payload:data
@@ -72,7 +73,7 @@ export const getPractitionerDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(`/api/v1/admin/practitioner/${id}`, config)
+        const {data} = await axios.get(`${url}/api/v1/admin/practitioner/${id}`, config)
         dispatch({
             type: PRACT_DETAILS_SUCCESS,
             payload: data
@@ -101,7 +102,7 @@ export const verifyPractitioner = (email) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/practitioner/verify`, {email}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/verify`, {email}, config)
         dispatch({
             type: PRACT_VERIFY_SUCCESS,
             payload:data
@@ -133,7 +134,7 @@ export const deactivatePractitioner = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/practitioner/deactivate/${id}`, {}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/deactivate/${id}`, {}, config)
 
         dispatch({
             type: PRACT_DEACTIVATE_SUCCESS,
@@ -166,7 +167,7 @@ export const activatePractitioner = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/practitioner/activate/${id}`, {}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/activate/${id}`, {}, config)
 
         dispatch({
             type: PRACT_ACTIVATE_SUCCESS,
@@ -199,7 +200,7 @@ export const invitePractitioner = (id, venue, date, time) => async (dispatch, ge
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/practitioner/invite/${id}`, {venue, date, time}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/invite/${id}`, {venue, date, time}, config)
 
         dispatch({
             type: PRACT_INVITE_SUCCESS,
@@ -232,7 +233,7 @@ export const declinePractitioner = (id, reason) => async (dispatch, getState) =>
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/practitioner/decline/${id}`, {reason}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/decline/${id}`, {reason}, config)
 
         dispatch({
             type: PRACT_DECLINE_SUCCESS,
@@ -265,7 +266,7 @@ export const rejectPractitioner = (id, reason) => async (dispatch, getState) => 
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/practitioner/reject/${id}`, {reason}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/reject/${id}`, {reason}, config)
 
         dispatch({
             type: PRACT_REJECT_SUCCESS,
@@ -298,7 +299,7 @@ export const emailPractitioner = (subject, emails, message) => async (dispatch, 
             }
         }
 
-        const { data } = await axios.post(`/api/v1/admin/practitioner/sendEmail`, {subject, emails, message}, config)
+        const { data } = await axios.post(`${url}/api/v1/admin/practitioner/sendEmail`, {subject, emails, message}, config)
 
         dispatch({
             type: PRACT_EMAIL_SUCCESS,

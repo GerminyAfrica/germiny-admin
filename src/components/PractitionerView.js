@@ -37,6 +37,8 @@ const PractitionerProfile = ({ match, history }) => {
   const [verified, setVerified] = useState(false)
   const [membershipclass, setMembershipClass] = useState('')
   const [rating, setRating] = useState('')
+  const [createdAt, setCreatedAt] = useState('')
+  const [channel, setChannel] = useState('')
 
   const dispatch = useDispatch()
 
@@ -106,6 +108,8 @@ const PractitionerProfile = ({ match, history }) => {
         setVerified(practitioner.verified)
         setMembershipClass(practitioner.membershipClass)
         setRating(practitioner.averageRating)
+        setCreatedAt(practitioner.createdAt.split("T")[0])
+        setChannel(practitioner.channel)
       }
   }, [dispatch, practId, practitioner])
 
@@ -222,7 +226,7 @@ const PractitionerProfile = ({ match, history }) => {
                 </Button>
            </ButtonGroup>}
                       
-           {!loading && practitioner && practitioner.status === 'Review' &&
+           {!loading && practitioner && practitioner.status === 'Invited' &&
            <ButtonGroup>
                <Button variant='primary' className='btn btn-primary' onClick={handleVerify}>
                     Verify
@@ -530,6 +534,31 @@ const PractitionerProfile = ({ match, history }) => {
                 </Form.Row>
                 <Form.Row>
                     <Col>
+                        <Form.Group controlId='createdAt'>
+                        <Form.Label>Registration Date</Form.Label>
+                            <Form.Control
+                                type='createdAt'
+                                value={createdAt}
+                                onChange={(e) => setCreatedAt(e.target.value)}
+                                readOnly>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId='channel'>
+                        <Form.Label>Registration Channel</Form.Label>
+                            <Form.Control
+                                type='channel'
+                                value={channel}
+                                onChange={(e) => setChannel(e.target.value)}
+                                readOnly>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+
+                </Form.Row>
+                <Form.Row>
+                    <Col>
                         <Form.Group controlId='totaljobs'>
                             <Form.Label>Total Number of Jobs</Form.Label>
                             <Form.Control
@@ -551,8 +580,6 @@ const PractitionerProfile = ({ match, history }) => {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-                </Form.Row>
-                <Form.Row>
                     <Col>
                         <Form.Group controlId='totalearned'>
                             <Form.Label>Total Earned</Form.Label>
@@ -569,6 +596,8 @@ const PractitionerProfile = ({ match, history }) => {
                             </InputGroup>
                         </Form.Group>
                     </Col>
+                </Form.Row>
+                <Form.Row>   
                     <Col>
                         <Form.Group controlId='wallet'>
                             <Form.Label>Amount in Wallet</Form.Label>
@@ -585,8 +614,6 @@ const PractitionerProfile = ({ match, history }) => {
                             </InputGroup>
                         </Form.Group>
                     </Col>
-                </Form.Row>
-                <Form.Row>
                     <Col>
                         <Form.Group controlId='totaldistance'>
                             <Form.Label>Total Distance</Form.Label>

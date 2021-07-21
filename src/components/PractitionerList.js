@@ -291,6 +291,7 @@ const PractitionerList = () => {
                           <option value="">No Filter</option>
                           <option value="New">New</option>
                           <option value="Review">Review</option>
+                          <option value="Invited">Invited</option>
                           <option value="Rejected">Rejected</option>
                           <option value="Verified">Verified</option>
                           <option value="Deactivated">Deactivated</option>

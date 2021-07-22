@@ -216,7 +216,7 @@ const PractitionerProfile = ({ match, history }) => {
         </Link>}
         <div style={{padding:"3%"}}>
             
-           {!loading && practitioner && practitioner.status === 'New' &&
+           {!loading && practitioner && (practitioner.status === 'New' || practitioner.status === 'Review') &&
            <ButtonGroup >
                <Button variant='info' className='btn btn-primary' onClick={handleShowInvite}>
                     Invite

@@ -7,8 +7,6 @@ export const listPatients = () => async (dispatch, getState) =>  {
         dispatch({type: PATIENT_LIST_REQUEST})
 
         const {userLogin: {userInfo, token}} = getState()
-
-
         const config = {
             headers : {
                 Authorization:`Bearer ${token}`

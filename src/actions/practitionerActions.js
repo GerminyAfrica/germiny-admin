@@ -95,9 +95,7 @@ export const verifyPractitioner = (id) => async (dispatch, getState) => {
 
 
         const config = {
-            
             headers : {
-                'Content-Type': 'application/json',
                 Authorization:`Bearer ${token}`
             }
         }

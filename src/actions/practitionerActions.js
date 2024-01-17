@@ -87,7 +87,7 @@ export const getPractitionerDetails = (id) => async (dispatch, getState) => {
     }
 }
 
-export const verifyPractitioner = (email) => async (dispatch, getState) => {
+export const verifyPractitioner = (id) => async (dispatch, getState) => {
     try {
         dispatch({type: PRACT_VERIFY_REQUEST})
 
@@ -102,7 +102,7 @@ export const verifyPractitioner = (email) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/verify`, {email}, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/verify/${id}`, config)
         dispatch({
             type: PRACT_VERIFY_SUCCESS,
             payload:data

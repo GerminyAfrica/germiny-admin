@@ -148,7 +148,7 @@ const PractitionerProfile = ({ match, history }) => {
 
   const handleVerify = (e) => {
     e.preventDefault()
-    dispatch(verifyPractitioner(email))
+    dispatch(verifyPractitioner(practId))
     
   }
 

@@ -102,7 +102,7 @@ export const verifyPractitioner = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/verify/${id}`, config)
+        const { data } = await axios.put(`${url}/api/v1/admin/practitioner/verify/${id}`, {}, config)
         dispatch({
             type: PRACT_VERIFY_SUCCESS,
             payload:data

@@ -5,7 +5,7 @@ export class StatsCard extends Component {
   render() {
     return (
       <div className="card card-stats">
-        <div className="content" style={{padding:"3%"}}>
+        <div className="content" style={{padding:"2%"}}>
           <Row>
             <Col xs={4}>
               <div className="icon-big text-center icon-warning">
@@ -22,7 +22,7 @@ export class StatsCard extends Component {
           <div className="footer">
             <hr />
             <div className="stats">
-              {this.props.statsIcon} {this.props.statsIconText}
+              {this.props.statsIcon} {this.props.statsIconText}{this.props.clickable}
             </div>
           </div>
         </div>

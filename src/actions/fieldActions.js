@@ -1,5 +1,13 @@
 import axios from 'axios'
-import { FIELD_CREATE_FAIL, FIELD_CREATE_REQUEST, FIELD_CREATE_SUCCESS, FIELD_DELETE_FAIL, FIELD_DELETE_REQUEST, FIELD_DELETE_SUCCESS, FIELD_LIST_FAIL, FIELD_LIST_REQUEST, FIELD_LIST_SUCCESS } from '../constants/fieldConstants'
+import { FIELD_CREATE_FAIL, 
+        FIELD_CREATE_REQUEST, 
+        FIELD_CREATE_SUCCESS, 
+        FIELD_DELETE_FAIL, 
+        FIELD_DELETE_REQUEST, 
+        FIELD_DELETE_SUCCESS, 
+        FIELD_LIST_FAIL, 
+        FIELD_LIST_REQUEST, 
+        FIELD_LIST_SUCCESS } from '../constants/fieldConstants'
 
 const url =  "https://germiny.dev" 
 export const listFields = () => async (dispatch, getState) =>  {

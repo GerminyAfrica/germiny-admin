@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component , useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import ChartistGraph from "react-chartist";
 import { Container, Row, Col } from "react-bootstrap";
@@ -13,11 +13,26 @@ import {
   responsiveSales,
   legendSales,
 } from "../variables/Variables.jsx";
+import { getActiveUsers, getOnlinePractitioners, getTotalRequests, getCompletedJobs } from "../actions/dashboardActions.js";
 
 const Dashboard = () =>  {
 
   const userLogin = useSelector((state) => state.userLogin)
+  const activeUsers = useSelector((state) => state.activeUsers)
+  const onlinePractitioners = useSelector((state) => state.onlinePractitioners)
+  const totalRequests = useSelector((state) => state.totalRequests)
+  const completedJobs = useSelector((state) => state.completedJobs)
+  const dispatch = useDispatch()
   const { userInfo } = userLogin
+
+
+  useEffect(() => {
+    dispatch(getActiveUsers())
+    dispatch(getOnlinePractitioners())
+    dispatch(getTotalRequests())
+    dispatch(getCompletedJobs())
+  }, [dispatch])
+
 
   const createLegend = (json) => {
     var legend = [];
@@ -29,6 +44,18 @@ const Dashboard = () =>  {
     }
     return legend;
   }
+  const updateActiveUsers = () => {
+    dispatch(getActiveUsers())
+  }
+  const updateOnlinePractitioners = () => {
+    dispatch(getOnlinePractitioners())
+  }
+  const updateTotalRequests = () => {
+    dispatch(getTotalRequests())
+  }
+  const updateCompletedJobs = () => {
+    dispatch(getCompletedJobs())
+  }
   
     return (
       <div className="content text-dark text-center">
@@ -37,9 +64,9 @@ const Dashboard = () =>  {
           <Row style={{padding:"2%"}}>
             <Col lg={3} sm={6} >
               <StatsCard
-                bigIcon={<i className=" fa-3x fas fa-user" style={{color:'olive'}} />}
+                bigIcon={<i className=" fa-3x fas fa-user" style={{color:'olive'}}/>}
                 statsText="Active Users"
-                statsValue="150"
+                statsValue={activeUsers.activeUsers.length}
                 statsIcon={<i className="fas fa-sync-alt" style={{color:'darkslategray'}}/>}
                 statsIconText="Updated now"
               />
@@ -48,16 +75,17 @@ const Dashboard = () =>  {
               <StatsCard
                 bigIcon={<i className=" fa-3x fas fa-mobile-alt" style={{color:'indigo'}} />}
                 statsText="Total Requests"
-                statsValue="1800"
+                statsValue={totalRequests.totalRequests.length}
                 statsIcon={<i className="fas fa-sync-alt" style={{color:'darkslategray'}}/>}
                 statsIconText="Updated now"
+
               />
             </Col>
             <Col lg={3} sm={6}>
               <StatsCard
                 bigIcon={<i className='fa-3x fas fa-user-md'style={{color:'steelblue'}}></i>}
                 statsText="Practs Online"
-                statsValue="50"
+                statsValue={onlinePractitioners.onlinePracts.length}
                 statsIcon={<i className="fas fa-clock" style={{color:'darkslategray'}}/>}
                 statsIconText="In the last hour"
               />
@@ -66,7 +94,7 @@ const Dashboard = () =>  {
               <StatsCard
                 bigIcon={<i className=" fa-3x fas fa-user-check" style={{color:'teal'}} />}
                 statsText="Completed Jobs"
-                statsValue="1200"
+                statsValue={completedJobs.completedJobs.length}
                 statsIcon={<i className="fas fa-clock" style={{color:'darkslategray'}}/>}
                 statsIconText="In the last hour"
               />

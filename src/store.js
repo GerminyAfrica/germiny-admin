@@ -6,6 +6,7 @@ import {patientListReducer, patientDeleteReducer, patientDetailsReducer} from '.
 import {userLoginReducer, userDetailsReducer, profileUpdateReducer} from './reducers/userReducers'
 import {fieldListReducer, fieldDeleteReducer, fieldCreateReducer} from './reducers/fieldReducers'
 import {emailListReducer, emailDeleteReducer, emailCreateReducer, emailDetailsReducer, emailUpdateReducer} from './reducers/emailReducers'
+import {activeUsersReducer, onlinePractitionersReducer, totalRequestsReducer, completedJobsReducer} from './reducers/dashboardReducers'
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -31,7 +32,11 @@ const reducer = combineReducers({
     emailDelete:emailDeleteReducer,
     emailCreate:emailCreateReducer,
     emailDetails:emailDetailsReducer,
-    emailUpdate:emailUpdateReducer
+    emailUpdate:emailUpdateReducer,
+    activeUsers:activeUsersReducer,
+    onlinePractitioners:onlinePractitionersReducer,
+    totalRequests:totalRequestsReducer,
+    completedJobs:completedJobsReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

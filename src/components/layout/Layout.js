@@ -43,7 +43,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
-import {logout, login} from '../../actions/userActions'
+import {logout, login, getUserDetails} from '../../actions/userActions'
 
 const drawerWidth = 240;
 
@@ -84,8 +84,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   menuTitle: {
-    fontSize: 13,
-    fontWeight: 900,
+    fontSize: 18,
+    fontWeight: 1000,
     color: "#bdbdbd",
     [theme.breakpoints.down("sm")]: {
       display: "none",
@@ -272,6 +272,10 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
     history.push('/login')
   };
 
+  useEffect(() => {
+    dispatch(getUserDetails())
+  }, [dispatch])
+
   const handleProfile = () => {
     history.push('/profile')
   };
@@ -312,7 +316,7 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
         </Typography>
         ) : <h6></h6>}
         {userInfo ? (
-          <Typography variant="subtitle2" className={classes.small, "text-uppercase"}>{userInfo.role}</Typography>
+          <Typography variant="subtitle2" className={classes.small}>{userInfo.role}</Typography>
         ) : <h6></h6>}
         
       </div>
@@ -340,7 +344,7 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
   const drawer = (
     <div>
       <div className={clsx(classes.toolbar, classes.menuHeader)}>
-        <Typography className={classes.menuTitle2}>GERMINY</Typography>
+        <Typography className={classes.menuTitle2}>GERMINY ADMIN</Typography>
       </div>
       <Divider />
       <List>
@@ -350,33 +354,39 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
           </ListItemIcon>
           <ListItemText primary={"Dashboard"} />
         </ListItem>
-        {userInfo && userInfo.role == "admin" && <ListItem button button onClick={() => route("/user")}>
-          <ListItemIcon>
-            <PeopleAlt />
-          </ListItemIcon>
-          <ListItemText primary={"User"} />
-        </ListItem>}
+        {userInfo && userInfo.role == "admin" && 
+          <ListItem button onClick={() => route("/user")}>
+            <ListItemIcon>
+              <PeopleAlt />
+            </ListItemIcon>
+            <ListItemText primary={"User"} />
+          </ListItem>
+        }
         <ListItem button onClick={() => route("/practitioner")}>
           <ListItemIcon>
             < PersonIcon/>
           </ListItemIcon>
           <ListItemText primary={"Practitioner"} />
         </ListItem>
-        {userInfo && userInfo.role == "admin" && <ListItem button onClick={() => route("/field")}>
-          <ListItemIcon>
-            <LocalHospital />
-          </ListItemIcon>
-          <ListItemText primary={"Specialization"} />
-        </ListItem>}
+        {userInfo && userInfo.role == "admin" && 
+          <ListItem button onClick={() => route("/field")}>
+            <ListItemIcon>
+              <LocalHospital />
+            </ListItemIcon>
+            <ListItemText primary={"Specialization"} />
+          </ListItem>
+        }
       </List>
       <Divider />
       <List>
-        {userInfo && userInfo.role == "admin" && <ListItem button onClick={() => route("/email")}>
-          <ListItemIcon>
-            <InboxIcon/>
-          </ListItemIcon>
-          <ListItemText primary={"All Email"} />
-        </ListItem>}
+        {userInfo && userInfo.role == "admin" && 
+          <ListItem button onClick={() => route("/email")}>
+            <ListItemIcon>
+              <InboxIcon/>
+            </ListItemIcon>
+            <ListItemText primary={"All Email"} />
+          </ListItem>
+          }
         
       </List>
     </div>
@@ -404,7 +414,7 @@ const Layout = ({ children, toggleDarkTheme, win }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.menuTitle}>GERMINY</Typography>
+          <Typography className={classes.menuTitle}>GERMINY ADMIN</Typography>
           <div className={classes.grow} />
 
           <Box className={classes.flex}>

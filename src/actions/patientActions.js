@@ -1,5 +1,13 @@
 import axios from 'axios'
-import { PATIENT_LIST_REQUEST, PATIENT_LIST_SUCCESS, PATIENT_LIST_FAIL, PATIENT_DELETE_REQUEST, PATIENT_DELETE_SUCCESS, PATIENT_DELETE_FAIL, PATIENT_DETAILS_REQUEST, PATIENT_DETAILS_SUCCESS, PATIENT_DETAILS_FAIL } from "../constants/patientConstants";
+import { PATIENT_LIST_REQUEST, 
+        PATIENT_LIST_SUCCESS, 
+        PATIENT_LIST_FAIL, 
+        PATIENT_DELETE_REQUEST, 
+        PATIENT_DELETE_SUCCESS, 
+        PATIENT_DELETE_FAIL, 
+        PATIENT_DETAILS_REQUEST, 
+        PATIENT_DETAILS_SUCCESS, 
+        PATIENT_DETAILS_FAIL } from "../constants/patientConstants";
 
 const url =  "https://germiny.dev" 
 export const listPatients = () => async (dispatch, getState) =>  {

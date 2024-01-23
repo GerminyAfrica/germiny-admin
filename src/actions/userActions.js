@@ -1,5 +1,15 @@
 import axios from "axios"
-import { PROFILE_UPDATE_FAIL, PROFILE_UPDATE_REQUEST, PROFILE_UPDATE_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_RESET, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from "../constants/userContants"
+import { PROFILE_UPDATE_FAIL, 
+        PROFILE_UPDATE_REQUEST, 
+        PROFILE_UPDATE_SUCCESS, 
+        USER_DETAILS_FAIL, 
+        USER_DETAILS_REQUEST, 
+        USER_DETAILS_SUCCESS, 
+        USER_DETAILS_RESET, 
+        USER_LOGIN_FAIL, 
+        USER_LOGIN_REQUEST, 
+        USER_LOGIN_SUCCESS, 
+        USER_LOGOUT } from "../constants/userContants"
 import { PRACT_LIST_RESET } from "../constants/practitionerConstants";
 
 const url =  "https://germiny.dev"

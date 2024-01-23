@@ -44,8 +44,7 @@
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "set NODE_OPTIONS=--openssl-legacy-provider && NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+    "eject": "react-scripts eject"
   },
   "proxy": "https://germiny.dev",
   "eslintConfig": {

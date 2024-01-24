@@ -37,11 +37,10 @@
   },
   "scripts": {
     "dev": "set PORT=5000 && react-scripts start",
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+    "eject": "react-scripts eject"
   },
   "proxy": "https://germiny.dev",
   "eslintConfig": {

@@ -3,7 +3,7 @@ import { PRACT_LIST_REQUEST, PRACT_LIST_SUCCESS, PRACT_LIST_FAIL, PRACT_DELETE_R
     PRACT_DETAILS_REQUEST, PRACT_DETAILS_SUCCESS, PRACT_DETAILS_FAIL, PRACT_VERIFY_REQUEST, PRACT_VERIFY_SUCCESS, PRACT_VERIFY_FAIL, 
     PRACT_DEACTIVATE_REQUEST, PRACT_DEACTIVATE_SUCCESS, PRACT_DEACTIVATE_FAIL, PRACT_ACTIVATE_REQUEST, PRACT_ACTIVATE_SUCCESS, 
     PRACT_ACTIVATE_FAIL, PRACT_INVITE_SUCCESS, PRACT_INVITE_REQUEST, PRACT_INVITE_FAIL, PRACT_DECLINE_REQUEST, PRACT_DECLINE_SUCCESS, 
-    PRACT_DECLINE_FAIL, PRACT_REJECT_REQUEST, PRACT_REJECT_SUCCESS, PRACT_REJECT_FAIL, PRACT_EMAIL_REQUEST, PRACT_EMAIL_SUCCESS, PRACT_EMAIL_FAIL } from "../constants/practitionerConstants";
+    PRACT_DECLINE_FAIL, PRACT_REJECT_REQUEST, PRACT_REJECT_SUCCESS, PRACT_REJECT_FAIL, PRACT_EMAIL_REQUEST, PRACT_EMAIL_SUCCESS, PRACT_EMAIL_FAIL, PRACT_UPDATE_REQUEST, PRACT_UPDATE_SUCCESS, PRACT_UPDATE_FAIL } from "../constants/practitionerConstants";
 
 const url =  "https://germiny.dev"
 export const listPractitioners = () => async (dispatch, getState) =>  {
@@ -311,4 +311,32 @@ export const emailPractitioner = (subject, emails, message) => async (dispatch, 
         })
     }
 
+}
+
+export const profileUpdate = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type:PRACT_UPDATE_REQUEST
+        })
+        const {userLogin: {token}} = getState()
+
+
+        const config = {
+            headers : {
+                Authorization:`Bearer ${token}`
+            }
+        }
+
+        const {data} = await axios.put(`${url}/api/v1/admin/practitioner/updateProfile/${user.id}`, user,  config)
+        dispatch({
+            type: PRACT_UPDATE_SUCCESS,
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: PRACT_UPDATE_FAIL,
+            payload:error.response && error.response.data.error ? error.response.data.error : error.message,
+        })
+    }
 }

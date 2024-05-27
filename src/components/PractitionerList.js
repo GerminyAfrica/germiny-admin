@@ -36,7 +36,7 @@ const PractitionerList = () => {
     const { loading:detailLoading, error:detailError, email:detailEmail } = emailDetails
 
     const [practEmail, setPractEmail] = useState([])
-    const [filter, setFilter] = useState('')
+    const [filter, setFilter] = useState(localStorage.getItem('filter'))
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
     const [subject, setSubject] = useState('')
     const [show, setShow] = useState(false);
@@ -214,6 +214,7 @@ const PractitionerList = () => {
                 lastname: pract.lastname,
                 specialization:pract.field,
                 status:pract.status,
+                documentStatus:pract.documentStatus,
                 online: pract.online? "Yes" : "No",
                 engaged:pract.engaged? "Yes" : "No",
                 active:pract.active? "Yes": "No",
@@ -223,7 +224,7 @@ const PractitionerList = () => {
                 action: <div>
                           <LinkContainer to={`/practitioner/${pract._id}/view`}>
                               <Button variant='primary' className='btn-sm'>
-                                  <i className='fas fa-eye'></i>
+                                  <i className='fas fa-edit'></i>
                               </Button>
                           </LinkContainer>
                           <Button variant='danger' className='btn-sm' onClick={() => {handleDelete(pract._id)}}>
@@ -234,7 +235,16 @@ const PractitionerList = () => {
         })
     }
     if (filter){
-      data.rows = data.rows.filter(row => row.status == filter)
+      localStorage.setItem('filter', filter)
+      if (filter == "All"){
+        data.rows = data.rows
+      }
+      else if (filter == 'Complete'){
+        data.rows = data.rows.filter(row => row.documentStatus == "Complete")
+      }
+      else{
+        data.rows = data.rows.filter(row => row.status == filter)
+      }
     }
 
 
@@ -288,8 +298,9 @@ const PractitionerList = () => {
                       <Form.Control as="select"
                           value={filter}
                           onChange={(e) => setFilter(e.target.value)}>
-                          <option value="">No Filter</option>
+                          <option value="All">No Filter</option>
                           <option value="New">New</option>
+                          <option value="Complete">Complete Document</option>
                           <option value="Review">Review</option>
                           <option value="Invited">Invited</option>
                           <option value="Rejected">Rejected</option>

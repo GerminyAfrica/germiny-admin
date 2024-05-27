@@ -2,7 +2,7 @@ import { PRACT_LIST_REQUEST, PRACT_LIST_SUCCESS, PRACT_LIST_FAIL, PRACT_LIST_RES
     PRACT_DETAILS_REQUEST, PRACT_DETAILS_SUCCESS, PRACT_DETAILS_FAIL, PRACT_DETAILS_RESET, PRACT_VERIFY_REQUEST, PRACT_VERIFY_SUCCESS, 
     PRACT_VERIFY_FAIL, PRACT_DEACTIVATE_REQUEST, PRACT_DEACTIVATE_SUCCESS, PRACT_DEACTIVATE_FAIL, PRACT_ACTIVATE_REQUEST, PRACT_ACTIVATE_SUCCESS, 
     PRACT_ACTIVATE_FAIL, PRACT_INVITE_REQUEST, PRACT_INVITE_SUCCESS, PRACT_INVITE_FAIL, PRACT_DECLINE_REQUEST, PRACT_DECLINE_SUCCESS, PRACT_DECLINE_FAIL,
-    PRACT_REJECT_REQUEST, PRACT_REJECT_SUCCESS, PRACT_REJECT_FAIL, PRACT_RESET, PRACT_EMAIL_REQUEST, PRACT_EMAIL_SUCCESS, PRACT_EMAIL_FAIL } from "../constants/practitionerConstants";
+    PRACT_REJECT_REQUEST, PRACT_REJECT_SUCCESS, PRACT_REJECT_FAIL, PRACT_RESET, PRACT_EMAIL_REQUEST, PRACT_EMAIL_SUCCESS, PRACT_EMAIL_FAIL, PRACT_UPDATE_REQUEST, PRACT_UPDATE_SUCCESS, PRACT_UPDATE_FAIL } from "../constants/practitionerConstants";
     
 export const practitionerListReducer = (state = {practitioners: [] }, action) => {
     switch (action.type) {
@@ -152,6 +152,20 @@ export const practitionerEmailReducer = (state = { }, action) => {
             return { loading:false, error: action.payload }
         case PRACT_RESET:
             return {}
+        default:
+            return state   
+    }
+}
+
+export const profileUpdateReducer = (state = { }, action) => {
+    switch (action.type) {
+        case PRACT_UPDATE_REQUEST:
+            return { loading:true}
+        case PRACT_UPDATE_SUCCESS:
+            return { loading:false, success: action.payload.success }
+        case PRACT_UPDATE_FAIL:
+            return { loading:false, error: action.payload }    
+
         default:
             return state   
     }

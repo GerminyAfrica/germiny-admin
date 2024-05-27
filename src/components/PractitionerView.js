@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import Message from '../components/Message'
 import Skeleton from 'react-loading-skeleton';
-import {getPractitionerDetails, verifyPractitioner, deactivatePractitioner, activatePractitioner, invitePractitioner, declinePractitioner, rejectPractitioner, listPractitioners} from '../actions/practitionerActions'
+import {getPractitionerDetails, verifyPractitioner, deactivatePractitioner, activatePractitioner, invitePractitioner, declinePractitioner, rejectPractitioner, listPractitioners, profileUpdate} from '../actions/practitionerActions'
 
 
 const PractitionerProfile = ({ match, history }) => {
@@ -183,6 +183,12 @@ const PractitionerProfile = ({ match, history }) => {
     handleCloseInvite()
   }
 
+  const updateProfile = (e) => {
+    e.preventDefault()
+    dispatch(profileUpdate({id:practitioner._id, firstname, lastname, email, dob, gender, practclass, specialization, yearofgrad, yearofhouse, yearofexp, licenseNo, licenseExpire}))
+    dispatch(getPractitionerDetails(practId))
+  }
+
   return (
     <>
         {loadingVerify && <Skeleton/>}
@@ -276,7 +282,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='firstname'
                                             value={firstname}
                                             onChange={(e) => setFirstname(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -287,7 +293,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='lastname'
                                             value={lastname}
                                             onChange={(e) => setLastname(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -322,7 +328,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='email'
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -335,7 +341,8 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='dob'
                                             value={dob}
                                             onChange={(e) => setDOB(e.target.value)}
-                                            readOnly>
+                                            placeholder='YYYY-MM-DD'
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -346,11 +353,14 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='gender'
                                             value={gender}
                                             onChange={(e) => setGender(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
+                            <Button variant='primary' onClick={updateProfile}>
+                                Update Profile
+                            </Button>
                         </Form>
                     
                     </Card>}
@@ -395,7 +405,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='practclass'
                                             value={practclass}
                                             onChange={(e) => setPractClass(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -406,7 +416,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='specialization'
                                             value={specialization}
                                             onChange={(e) => setSpecialization(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -419,7 +429,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='yearofgrad'
                                             value={yearofgrad}
                                             onChange={(e) => setYearOfGrad(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -430,7 +440,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='yearofhouse'
                                             value={yearofhouse}
                                             onChange={(e) => setYearOfHouse(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -445,7 +455,7 @@ const PractitionerProfile = ({ match, history }) => {
                                                 type='yearofexp'
                                                 value={yearofexp}
                                                 onChange={(e) => setYearOfExp(e.target.value)}
-                                                readOnly>
+                                                >
                                             </Form.Control>
                                         </InputGroup>
                                     </Form.Group>
@@ -459,7 +469,7 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='licenseNo'
                                             value={licenseNo}
                                             onChange={(e) => setLicenseNo(e.target.value)}
-                                            readOnly>
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -470,11 +480,15 @@ const PractitionerProfile = ({ match, history }) => {
                                             type='licenseExpire'
                                             value={licenseExpire}
                                             onChange={(e) => setLicenseExpire(e.target.value)}
-                                            readOnly>
+                                            placeholder='YYYY-MM-DD'
+                                            >
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
+                            <Button variant='primary' onClick={updateProfile}>
+                                Update Profile
+                            </Button>
                         </Form>
                                 
                       </Card>}

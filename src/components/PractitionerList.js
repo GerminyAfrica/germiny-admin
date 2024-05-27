@@ -306,6 +306,7 @@ const PractitionerList = () => {
                           <option value="Rejected">Rejected</option>
                           <option value="Verified">Verified</option>
                           <option value="Deactivated">Deactivated</option>
+                          <option value="Expired">Expired</option>
                       </Form.Control>
                     </InputGroup>
                 </Form.Group>

@@ -246,7 +246,7 @@ const PractitionerProfile = ({ match, history }) => {
                 Deactivate
             </Button>}
 
-           {!loading && practitioner && practitioner.status === 'Deactivated' && !practitioner.active && <Button variant='success' className='btn btn-primary pull-right' onClick={handleActivate}>
+           {!loading && practitioner && (practitioner.status === 'Deactivated' || practitioner.status === 'Expired') && <Button variant='success' className='btn btn-primary pull-right' onClick={handleActivate}>
                 Activate
             </Button>}
         </div>

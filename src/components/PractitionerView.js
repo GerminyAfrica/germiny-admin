@@ -223,7 +223,7 @@ const PractitionerProfile = ({ match, history }) => {
         <div style={{padding:"3%"}}>
             
            {!loading && practitioner && (practitioner.status === 'New' || practitioner.status === 'Review') &&
-           <ButtonGroup >
+           <ButtonGroup className="me-2">
                <Button variant='info' className='btn btn-primary' onClick={handleShowInvite}>
                     Invite
                 </Button>
@@ -231,7 +231,6 @@ const PractitionerProfile = ({ match, history }) => {
                     Decline
                 </Button>
            </ButtonGroup>}
-           <div className="vr mx-2"></div>
                       
            {!loading && practitioner && (practitioner.status === 'Invited' || practitioner.status === 'New' || practitioner.status === 'Review')  &&
            <ButtonGroup>

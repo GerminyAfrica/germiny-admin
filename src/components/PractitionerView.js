@@ -232,7 +232,7 @@ const PractitionerProfile = ({ match, history }) => {
                 </Button>
            </ButtonGroup>}
                       
-           {!loading && practitioner && practitioner.status === 'Invited' &&
+           {!loading && practitioner && (practitioner.status === 'Invited' || practitioner.status === 'New' || practitioner.status === 'Review')  &&
            <ButtonGroup>
                <Button variant='primary' className='btn btn-primary' onClick={handleVerify}>
                     Verify

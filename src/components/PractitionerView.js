@@ -231,6 +231,7 @@ const PractitionerProfile = ({ match, history }) => {
                     Decline
                 </Button>
            </ButtonGroup>}
+           <div className="vr mx-2"></div>
                       
            {!loading && practitioner && (practitioner.status === 'Invited' || practitioner.status === 'New' || practitioner.status === 'Review')  &&
            <ButtonGroup>

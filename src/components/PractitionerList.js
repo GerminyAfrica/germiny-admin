@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Button, Modal, Form, Col, DropdownButton, Dropdown} from 'react-bootstrap'
+import {Button, Modal, Form, DropdownButton, Dropdown} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import Message from './Message'
 import Skeleton from 'react-loading-skeleton';
@@ -58,7 +58,6 @@ const PractitionerList = () => {
     const [filter, setFilter] = useState(localStorage.getItem('filter'))
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
     const [subject, setSubject] = useState('')
-    const [show, setShow] = useState(false);
     const [showEmail, setShowEmail] = useState(false)
     const [showSelect, setShowSelect] = useState(false)
     const [showSend, setShowSend] = useState(false)
@@ -115,11 +114,6 @@ const PractitionerList = () => {
           dispatch(deletePractitioner(id))
       }
     }
-
-  const handleClose = () => setShow(false);
-  const handleShow = (id) => {
-      setShow(true)
-  }
 
   const handleShowEmail = () => {
     setShowEmail(true)
@@ -687,36 +681,6 @@ const PractitionerList = () => {
         </Box>
 
         {/* Modals */}
-        <Modal show={show} onHide={handleClose} centered className="people-modal" backdropClassName="people-modal-backdrop" scrollable>
-                <Modal.Header closeButton>
-                <Modal.Title>Delete</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are You Sure? This action cannot be reverted</Modal.Body>
-                <Modal.Footer>
-                <Button 
-                  variant={isDarkMode ? "outline-light" : "primary"} 
-                  onClick={handleClose}
-                  style={{
-                    backgroundColor: isDarkMode ? 'rgba(108, 117, 125, 0.1)' : '#007bff',
-                    borderColor: isDarkMode ? '#6c757d' : '#007bff',
-                    color: isDarkMode ? '#6c757d' : '#fff'
-                  }}
-                >
-                    Discard
-                </Button>
-                <Button 
-                  variant="danger" 
-                  onClick={handleDelete}
-                  style={{
-                    backgroundColor: '#dc3545',
-                    borderColor: '#dc3545',
-                    color: '#fff'
-                  }}
-                >
-                    Delete
-                </Button>
-                </Modal.Footer>
-            </Modal>
             <Modal show={showEmail} onHide={handleCloseEmail} size="lg" centered className={`people-modal ${isDarkMode ? 'people-modal--dark' : ''}`} backdropClassName="people-modal-backdrop" scrollable>
                 <Modal.Header closeButton>
                 <Modal.Title>Compose Email</Modal.Title>

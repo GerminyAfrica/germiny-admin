@@ -14,7 +14,7 @@ export const listPatients = () => async (dispatch, getState) =>  {
     try {
         dispatch({type: PATIENT_LIST_REQUEST})
 
-        const {userLogin: {userInfo, token}} = getState()
+        const {userLogin: {token}} = getState()
         const config = {
             headers : {
                 Authorization:`Bearer ${token}`

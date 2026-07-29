@@ -22,11 +22,8 @@ import {
   Grid,
   Menu,
   MenuItem,
-  Backdrop,
   useMediaQuery,
-  Chip,
 } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
@@ -41,10 +38,9 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
-import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
-import {logout, login, getUserDetails} from '../../actions/userActions'
+import {logout, getUserDetails} from '../../actions/userActions'
 import { useTheme as useCustomTheme } from '../../theme/ThemeProvider'
 import './Layout.css'
 
@@ -344,10 +340,6 @@ const Layout = ({ children, win }) => {
   const isMenuOpen = Boolean(anchorEl);
   const menuId = "primary-search-account-menu";
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -412,10 +404,10 @@ const Layout = ({ children, win }) => {
           <Typography variant="subtitle2" className={classes.name2}>
           {userInfo.displayname}
         </Typography>
-        ) : <h6></h6>}
+        ) : null}
         {userInfo ? (
           <Typography variant="subtitle2" className={classes.small}>{userInfo.role}</Typography>
-        ) : <h6></h6>}
+        ) : null}
         
       </div>
       <Divider />

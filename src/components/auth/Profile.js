@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Image, Form, Button, Row, Col } from 'react-bootstrap'
+import { Card, Image, Form, Button, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/Message'
 import Skeleton from 'react-loading-skeleton';

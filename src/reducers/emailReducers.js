@@ -15,7 +15,7 @@ import { EMAIL_LIST_FAIL,
         EMAIL_UPDATE_REQUEST, 
         EMAIL_UPDATE_SUCCESS, 
         EMAIL_UPDATE_FAIL, 
-        EMAIL_DETAILS_RESET} from "../constants/emailConstants"
+        } from "../constants/emailConstants"
 
 export const emailListReducer = (state = {emails: [] }, action) => {
     switch (action.type) {

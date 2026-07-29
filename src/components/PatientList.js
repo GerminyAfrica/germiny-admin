@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Table, Button, Modal, DropdownButton, Dropdown} from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import {DropdownButton, Dropdown} from 'react-bootstrap'
 import Message from './Message'
 import Skeleton from 'react-loading-skeleton';
 import './peoplePages.css'
@@ -21,9 +20,8 @@ import {
   Tooltip
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
-import { Edit as EditIcon, Delete as DeleteIcon, Visibility as ViewIcon } from "@material-ui/icons";
+import { Delete as DeleteIcon, Visibility as ViewIcon } from "@material-ui/icons";
 import {listPatients, deletePatient} from '../actions/patientActions'
-import { MDBDataTableV5 } from 'mdbreact';
 import { useTheme as useCustomTheme } from '../theme/ThemeProvider';
 import { useTheme } from '@material-ui/core/styles';
 import * as XLSX from 'xlsx'
@@ -40,7 +38,6 @@ const PatientList = () => {
         const patientDelete = useSelector(state => state.patientDelete)
         const {success, error:err} = patientDelete
 
-        const [show, setShow] = useState(false);
         const [search, setSearch] = useState("");
         const [page, setPage] = useState(1);
         const [selectedPatientIds, setSelectedPatientIds] = useState([]);
@@ -50,48 +47,6 @@ const PatientList = () => {
         useEffect(() => {
             dispatch(listPatients())
      }, [dispatch, success])
-
-    const data = {
-        columns:[
-          {
-            label: 'First Name',
-            field: 'firstname',
-            sort: 'asc'
-          },
-          {
-            label: 'Last Name',
-            field: 'lastname',
-            sort: 'asc'
-          },
-          {
-            label: 'Email',
-            field: 'email'
-          },
-          {
-            label: 'Phone',
-            field: 'phone',
-          },
-          {
-            label: 'Gender',
-            field: 'gender',
-          },
-          {
-            label: 'Average Rating',
-            field: 'averageRating',
-            sort: 'asc'
-          },
-          {
-            label: 'Last Active',
-            field: 'lastActive',
-            sort: 'asc'
-          },
-          {
-            label: 'Action',
-            field: 'action'
-          }
-        ], 
-        rows:[]
-    }
 
         // Filter patients by search
         const filteredPatients = patients ? patients.filter(
@@ -169,11 +124,6 @@ const PatientList = () => {
         }
     }
 
-    const handleClose = () => setShow(false);
-    const handleShow = (id) => {
-        setShow(true)
-    }
-    
     return (
         <Box className={`people-page-shell users-page-shell ${isDarkMode ? 'people-page-shell--dark' : 'people-page-shell--light'}`} sx={{ 
             padding: { xs: 2, sm: 3 }, 
@@ -451,20 +401,6 @@ const PatientList = () => {
                 )}
                 </>
             )}
-            <Modal show={show} onHide={handleClose} centered>
-                <Modal.Header closeButton>
-                <Modal.Title>Delete</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are You Sure? This action cannot be reverted</Modal.Body>
-                <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
-                    Discard
-                </Button>
-                <Button variant="danger" onClick={() => {handleDelete()}}>
-                    Delete
-                </Button>
-                </Modal.Footer>
-            </Modal>
         </Box>
     )
 }

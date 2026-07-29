@@ -53,7 +53,7 @@ const Message = ({variant, children}) => {
             </div>
         )
     }
-    return <h2></h2>;
+    return null;
 }
 
 

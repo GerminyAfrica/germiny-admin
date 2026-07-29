@@ -1,8 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
-import Sidebar from "./components/layout/Sidebar";
 import Login from "./components/auth/Login";
 import Profile from "./components/auth/Profile";
 import "./App.css";
@@ -14,7 +11,6 @@ import PatientView from "./components/PatientView";
 import PatientList from "./components/PatientList";
 import FieldList from "./components/FieldList"
 import EmailList from "./components/EmailList"
-import routes from "./routes";
 import Layout from "./components/layout/Layout";
 import ThemeProvider from "./theme/ThemeProvider";
 

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Col, Form, Button, Modal} from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import {Form, Button, Modal} from 'react-bootstrap'
 import Message from './Message'
 import Skeleton from 'react-loading-skeleton';
 import { 
@@ -59,7 +58,6 @@ const EmailList = () => {
     const [emailSubject, setEmailSubject] = useState('')
     const message = getHtml(editorState)
     const emailMessage = getHtml(updateEditorState)
-    const [show, setShow] = useState(false);
     const [showCreate, setShowCreate] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
 

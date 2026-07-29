@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { Link, useHistory } from "react-router-dom";
 import { useCustomTheme } from '../../hooks/useCustomTheme';
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +93,7 @@ const Login = ({location, history}) => {
   const [values, setValues] = React.useState(INIT_VALUES);
   const classes = useStyles();
   const [isPassword, setIsPassword] = useState(false);
-  const { isDarkMode, colors } = useCustomTheme();
+  const { colors } = useCustomTheme();
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 

@@ -31,7 +31,6 @@ import {
 } from "../variables/Variables.jsx";
 import { getActiveUsers, getOnlinePractitioners, getTotalRequests, getCompletedJobs } from "../actions/dashboardActions.js";
 import { useTheme as useCustomTheme } from '../theme/ThemeProvider';
-import { useTheme } from '@material-ui/core/styles';
 import './Dashboard.css';
 
 const Dashboard = () =>  {

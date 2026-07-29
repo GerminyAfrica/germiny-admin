@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Image, Form, Button, ButtonGroup, Row, Col, Modal, Tabs, Tab } from 'react-bootstrap'
+import { Card, Image, Form, Button, ButtonGroup, Col, Modal, Tabs, Tab } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -25,7 +25,6 @@ const PractitionerProfile = ({ match, history }) => {
   const [yearofexp, setYearOfExp] = useState('')
   const [licenseNo, setLicenseNo] = useState('')
   const [licenseExpire, setLicenseExpire] = useState('')
-  const [doc, setDoc] = useState([])
   const [wallet, setWallet] = useState('')
   const [totalreject, setTotalReject] = useState('')
   const [totalearned, setTotalEarned] = useState('')
@@ -97,7 +96,6 @@ const PractitionerProfile = ({ match, history }) => {
         setYearOfExp(practitioner.yearOfExp)
         setLicenseNo(practitioner.licenseNo)
         setLicenseExpire(practitioner.licenseExpire.split("T")[0])
-        setDoc(practitioner.doc)
         setWallet(practitioner.wallet)
         setTotalReject(practitioner.totalReject)
         setTotalEarned(practitioner.totalEarned)

@@ -23,6 +23,7 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  Button,
 } from "@material-ui/core";
 
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -577,51 +578,69 @@ const Layout = ({ children, win }) => {
       
       {/* User Profile Section at Bottom */}
       {userInfo && (
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={handleProfile}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              handleProfile();
-            }
-          }}
-          style={{ 
-          margin: "15px", 
-          padding: "15px", 
-          background: theme.palette.type === 'dark' ? "rgba(255, 255, 255, 0.05)" : "rgba(15, 23, 42, 0.04)",
-          borderRadius: "12px",
-          backdropFilter: "blur(10px)",
-          borderTop: `1px solid ${theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'}`,
-          cursor: "pointer",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <StyledBadge
-              overlap="circle"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              variant="dot"
-            >
-              <Avatar style={{ width: 35, height: 35 }}>
-                {userInfo.displayname?.charAt(0)}
-              </Avatar>
-            </StyledBadge>
-            <div>
-              <Typography variant="body2" style={{ 
-                color: theme.palette.type === 'dark' ? "#ffffff" : "#1f2937", 
-                fontWeight: 500,
-                fontSize: "13px" 
-              }}>
-                {userInfo.displayname}
-              </Typography>
-              <Typography variant="caption" style={{ 
-                color: theme.palette.type === 'dark' ? "rgba(255, 255, 255, 0.7)" : "rgba(15, 23, 42, 0.7)",
-                fontSize: "11px"
-              }}>
-                {userInfo.role}
-              </Typography>
+        <div style={{ margin: "15px" }}>
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={handleProfile}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleProfile();
+              }
+            }}
+            style={{ 
+            padding: "15px", 
+            background: theme.palette.type === 'dark' ? "rgba(255, 255, 255, 0.05)" : "rgba(15, 23, 42, 0.04)",
+            borderRadius: "12px",
+            backdropFilter: "blur(10px)",
+            borderTop: `1px solid ${theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'}`,
+            cursor: "pointer",
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <StyledBadge
+                overlap="circle"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                variant="dot"
+              >
+                <Avatar style={{ width: 35, height: 35 }}>
+                  {userInfo.displayname?.charAt(0)}
+                </Avatar>
+              </StyledBadge>
+              <div>
+                <Typography variant="body2" style={{ 
+                  color: theme.palette.type === 'dark' ? "#ffffff" : "#1f2937", 
+                  fontWeight: 500,
+                  fontSize: "13px" 
+                }}>
+                  {userInfo.displayname}
+                </Typography>
+                <Typography variant="caption" style={{ 
+                  color: theme.palette.type === 'dark' ? "rgba(255, 255, 255, 0.7)" : "rgba(15, 23, 42, 0.7)",
+                  fontSize: "11px"
+                }}>
+                  {userInfo.role}
+                </Typography>
+              </div>
             </div>
           </div>
+
+          <Button
+            fullWidth
+            variant="outlined"
+            onClick={handleLogout}
+            style={{
+              marginTop: 12,
+              borderRadius: 12,
+              borderColor: theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(15, 23, 42, 0.16)',
+              color: theme.palette.type === 'dark' ? '#f8fafc' : '#111827',
+              textTransform: 'none',
+              fontWeight: 700,
+              background: theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(15, 23, 42, 0.03)',
+            }}
+          >
+            Logout
+          </Button>
         </div>
       )}
     </div>

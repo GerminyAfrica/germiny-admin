@@ -1,0 +1,840 @@
+.people-page-shell {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.people-page-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: none;
+}
+
+.people-page-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.people-page-shell--light {
+  color: #1f2937;
+  background: transparent;
+}
+
+.people-page-shell--dark {
+  color: #f8fafc;
+  background: transparent;
+}
+
+.people-page-hero,
+.people-detail-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.people-page-shell--dark .people-page-hero,
+.people-page-shell--dark .people-detail-hero {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.people-page-hero__eyebrow,
+.people-detail-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.people-page-hero__title,
+.people-detail-hero__title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.people-page-hero__subtitle,
+.people-detail-hero__subtitle {
+  max-width: 52rem;
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  opacity: 0.82;
+}
+
+.people-page-hero__meta,
+.people-detail-hero__meta {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.people-page-hero__pill,
+.people-detail-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.people-page-shell--dark .people-page-hero__pill,
+.people-page-shell--dark .people-detail-hero__pill {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.people-control-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.people-control-strip > * {
+  flex-shrink: 0;
+}
+
+.people-table-shell {
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.people-table-shell thead th {
+  background: rgba(100, 116, 139, 0.08);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.people-page-shell--dark .people-table-shell {
+  border-color: rgba(148, 163, 184, 0.12);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.people-page-shell--dark .people-table-shell thead th {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f8fafc;
+}
+
+.people-table-shell tbody tr {
+  transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.people-table-shell tbody tr:hover {
+  transform: translateY(-1px);
+}
+
+.people-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.practitioner-page-shell {
+  overflow: visible !important;
+}
+
+.practitioner-control-strip {
+  position: relative;
+  z-index: 1000;
+}
+
+.practitioner-control-strip .dropdown,
+.practitioner-control-strip .btn-group {
+  position: relative;
+}
+
+.practitioner-control-strip .dropdown-menu {
+  z-index: 1010 !important;
+}
+
+.practitioner-page-shell .people-table-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.users-page-shell {
+  overflow: visible !important;
+}
+
+.users-page-shell .people-control-strip {
+  position: relative;
+  z-index: 1000;
+}
+
+.users-page-shell .people-control-strip .dropdown,
+.users-page-shell .people-control-strip .btn-group {
+  position: relative;
+}
+
+.users-page-shell .people-control-strip .dropdown-menu {
+  z-index: 1010 !important;
+}
+
+.users-page-shell .people-table-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.practitioner-actions-dropdown .btn {
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+}
+
+.practitioner-actions-dropdown .dropdown-menu {
+  min-width: 210px;
+  overflow: visible;
+  background: #ffffff !important;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.16);
+}
+
+.people-page-shell--light .practitioner-actions-dropdown .dropdown-menu {
+  background: #ffffff !important;
+  border-color: rgba(148, 163, 184, 0.22) !important;
+}
+
+.people-page-shell--light .practitioner-actions-dropdown .dropdown-item,
+.people-page-shell--light .practitioner-submenu-panel .dropdown-item,
+.people-page-shell--light .practitioner-submenu-trigger {
+  color: #0f172a !important;
+}
+
+.people-page-shell--light .practitioner-actions-dropdown .dropdown-item:hover,
+.people-page-shell--light .practitioner-actions-dropdown .dropdown-item:focus,
+.people-page-shell--light .practitioner-submenu-panel .dropdown-item:hover,
+.people-page-shell--light .practitioner-submenu-panel .dropdown-item:focus,
+.people-page-shell--light .practitioner-submenu-trigger:hover,
+.people-page-shell--light .practitioner-submenu-trigger:focus {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.practitioner-submenu-wrap {
+  position: relative;
+}
+
+.practitioner-submenu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.practitioner-submenu-arrow {
+  margin-left: 0.75rem;
+  opacity: 0.68;
+}
+
+.practitioner-submenu-panel {
+  display: none;
+  position: absolute;
+  top: -4px;
+  left: calc(100% + 6px);
+  min-width: 210px;
+  background: #ffffff !important;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.16);
+  padding: 0.3rem 0;
+  z-index: 2250;
+}
+
+.practitioner-submenu-panel.show {
+  display: block;
+}
+
+.people-page-shell--dark .practitioner-actions-dropdown .dropdown-menu {
+  background: rgba(18, 18, 18, 0.96) !important;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.people-page-shell--dark .practitioner-actions-dropdown .dropdown-item {
+  color: #f8fafc;
+}
+
+.people-page-shell--dark .practitioner-actions-dropdown .dropdown-item:hover,
+.people-page-shell--dark .practitioner-actions-dropdown .dropdown-item:focus {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.people-page-shell--dark .practitioner-submenu-panel {
+  background: rgba(18, 18, 18, 0.98) !important;
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+.practitioner-bulk-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(10px);
+}
+
+.people-page-shell--dark .practitioner-bulk-actions {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.practitioner-selected-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.58rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(148, 163, 184, 0.16);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.people-page-shell--dark .practitioner-selected-pill {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.practitioner-bulk-btn {
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+}
+
+.people-chip {
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+
+.people-detail-shell {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: clamp(1rem, 2.5vw, 2.5rem);
+  background: linear-gradient(180deg, #fafafa 0%, #e5e7eb 100%);
+}
+
+.people-detail-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(0, 0, 0, 0.08), transparent 26%),
+    radial-gradient(circle at 88% 10%, rgba(0, 0, 0, 0.05), transparent 26%),
+    radial-gradient(circle at 85% 80%, rgba(0, 0, 0, 0.05), transparent 24%);
+}
+
+.people-detail-shell--dark {
+  background: linear-gradient(180deg, #0a0a0a 0%, #1f1f1f 100%);
+  color: #f8fafc;
+}
+
+.people-detail-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.people-detail-shell__backbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.people-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.people-detail-tabs .nav-tabs {
+  border-bottom: 0;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.people-detail-tabs .nav-link {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: inherit;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+}
+
+.people-detail-shell--dark .people-detail-tabs .nav-link {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.people-detail-tabs .nav-link.active {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, #111111 0%, #2f2f2f 100%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.people-form-card {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08) !important;
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.people-detail-shell--dark .people-form-card {
+  background: rgba(15, 23, 42, 0.72) !important;
+  border-color: rgba(148, 163, 184, 0.12) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24) !important;
+  color: #f8fafc;
+}
+
+.people-form-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  font-weight: 800;
+  padding: 1rem 1.2rem;
+}
+
+.people-form-card .card-body,
+.people-form-card form {
+  padding: 1rem 1.2rem !important;
+}
+
+.people-form-card .form-control,
+.people-form-card .custom-select {
+  min-height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: none;
+  color: inherit;
+}
+
+.people-detail-shell--dark .people-form-card .form-control,
+.people-detail-shell--dark .people-form-card .custom-select {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(148, 163, 184, 0.18);
+  color: #f8fafc;
+}
+
+.people-form-card .form-control:focus,
+.people-form-card .custom-select:focus,
+.people-form-card .form-control:focus-visible,
+.people-form-card .custom-select:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.12);
+  border-color: #111111;
+}
+
+.people-form-card .input-group-text {
+  border-radius: 14px;
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: inherit;
+}
+
+.people-form-card .btn,
+.people-modal .btn {
+  border-radius: 999px;
+  font-weight: 700;
+  padding-inline: 1rem;
+}
+
+.people-form-card .form-label,
+.people-form-card .card-header,
+.people-modal .modal-title {
+  color: inherit;
+}
+
+.people-form-card .form-check-label {
+  font-weight: 600;
+}
+
+.people-modal .modal-content {
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(18px);
+}
+
+.people-modal {
+  z-index: 12000 !important;
+}
+
+.people-modal-backdrop {
+  z-index: 11990 !important;
+}
+
+.people-modal .modal-dialog {
+  max-height: calc(100vh - 1.5rem);
+}
+
+.people-modal .modal-body {
+  overflow-y: auto;
+}
+
+.people-modal .modal-header,
+.people-modal .modal-footer {
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+.people-modal--dark .modal-content {
+  background: rgba(15, 23, 42, 0.96);
+  color: #f8fafc;
+}
+
+.people-modal--background-blur .modal-content {
+  filter: blur(2px);
+  opacity: 0.75;
+  transform: scale(0.995);
+  transition: filter 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.patient-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.patient-overview-grid .patient-info-card:last-child {
+  grid-column: 1 / -1;
+}
+
+.patient-avatar-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.7rem;
+}
+
+.patient-avatar-wrap {
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  border: 3px solid rgba(148, 163, 184, 0.32);
+  padding: 6px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.08), rgba(148, 163, 184, 0.04));
+}
+
+.patient-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.patient-name {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.patient-handle {
+  margin: 0;
+  opacity: 0.72;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.patient-vitals-strip {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.patient-vital-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.34rem 0.68rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.patient-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.patient-info-card .card-header {
+  padding: 0.82rem 0.98rem;
+}
+
+.patient-info-card .card-body {
+  padding: 0.88rem 0.98rem !important;
+}
+
+.patient-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.58rem 0.68rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(148, 163, 184, 0.07);
+}
+
+.patient-info-item--full {
+  grid-column: 1 / -1;
+}
+
+.patient-info-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.74;
+  font-weight: 700;
+}
+
+.patient-info-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.patient-metric-tile {
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(148, 163, 184, 0.08);
+  padding: 0.82rem;
+  height: 100%;
+}
+
+.patient-metric-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  font-weight: 700;
+}
+
+.patient-metric-value {
+  margin-top: 0.36rem;
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.patient-metric-value span {
+  font-size: 0.74rem;
+  opacity: 0.72;
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
+.people-detail-shell--dark .patient-info-item,
+.people-detail-shell--dark .patient-metric-tile,
+.people-detail-shell--dark .patient-vital-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.practitioner-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.practitioner-professional-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.practitioner-pro-card {
+  grid-column: span 8;
+}
+
+.practitioner-docs-card {
+  grid-column: span 4;
+}
+
+.practitioner-info-card .card-header {
+  padding: 0.82rem 0.98rem;
+}
+
+.account-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.account-identity-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.72rem;
+}
+
+.account-upload-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  background: transparent;
+  padding: 0.82rem 0.98rem;
+}
+
+.account-edit-card .card-header,
+.account-summary-card .card-header {
+  padding: 0.82rem 0.98rem;
+}
+
+.account-edit-card .card-body,
+.account-summary-card .card-body {
+  padding: 0.88rem 0.98rem !important;
+}
+
+.account-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.35rem;
+}
+
+.account-summary-card {
+  grid-column: 1 / -1;
+}
+
+.practitioner-info-card .card-body {
+  padding: 0.88rem 0.98rem !important;
+}
+
+.practitioner-avatar-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.72rem;
+}
+
+.practitioner-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.practitioner-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.62rem;
+}
+
+.practitioner-doc-tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.66rem 0.8rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(148, 163, 184, 0.08);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.practitioner-doc-tile:hover {
+  transform: translateY(-1px);
+  background: rgba(148, 163, 184, 0.14);
+  text-decoration: none;
+  color: inherit;
+}
+
+.practitioner-doc-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.practitioner-doc-icon {
+  font-size: 1rem;
+  opacity: 0.76;
+}
+
+.people-detail-shell--dark .practitioner-doc-tile {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.people-detail-shell--dark .practitioner-doc-tile:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 992px) {
+  .patient-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-overview-grid .patient-info-card:last-child {
+    grid-column: auto;
+  }
+
+  .practitioner-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-summary-card {
+    grid-column: auto;
+  }
+
+  .practitioner-professional-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practitioner-pro-card,
+  .practitioner-docs-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .patient-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practitioner-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

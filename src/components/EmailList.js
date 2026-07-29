@@ -4,9 +4,23 @@ import {Col, Form, Button, Modal} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import Message from './Message'
 import Skeleton from 'react-loading-skeleton';
-import { Typography } from "@material-ui/core";
+import { 
+  Box,
+  Typography, 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableContainer, 
+  TableHead, 
+  TableRow, 
+  Paper,
+  IconButton,
+  Tooltip,
+} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import {listEmails, createEmail, deleteEmail, getEmailDetails, updateEmail} from '../actions/emailActions'
-import { MDBDataTableV5 } from 'mdbreact';
+import { useCustomTheme } from '../hooks/useCustomTheme';
 
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromHTML, ContentState} from 'draft-js'
@@ -19,6 +33,7 @@ const getHtml = editorState => draftToHtml(convertToRaw(editorState.getCurrentCo
 
 const EmailList = () => {
     const dispatch= useDispatch()
+    const { isDarkMode, colors } = useCustomTheme()
 
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
@@ -101,51 +116,45 @@ const EmailList = () => {
         handleCloseEdit()
     }
 
-    const data = {
-        columns:[
-          {
-            label: 'Subject',
-            field: 'subject',
-            sort: 'disabled'
-          },
-          
-          {
-            label: 'Action',
-            field: 'action'
-          }
-        ], 
-        rows:[]
-    }
-
-    if (emails){
-        emails.map(email => {
-            data.rows.push({
-                subject:email.subject,
-                action: <div>
-                            
-                                <Button variant='primary' className='btn-sm' onClick={() => {handleShowEdit(email._id)}}>
-                                    <i className='fas fa-edit'></i>
-                                </Button>
-                           
-                            <Button variant='danger' className='btn-sm' onClick={() => {handleDelete(email._id)}}>
-                                <i className='fas fa-trash-alt'></i>
-                            </Button>
-                        </div>                      
-
-            })
-        })
-    }
-
-    
     return (
-        <div className="text-dark">
-           <Typography style={{ padding: '10px' }} variant="h6"> Emails</Typography>
+      <Box
+        className={`people-page-shell ${isDarkMode ? 'people-page-shell--dark' : 'people-page-shell--light'}`}
+        sx={{
+          padding: { xs: 2, sm: 3, md: 4 },
+          margin: { xs: 1, sm: 2, md: 3 },
+          minHeight: '80vh',
+          color: isDarkMode ? '#fff' : '#000'
+        }}
+      >
+        <Box className="people-page-hero">
+          <Box>
+            <Typography variant="overline" className="people-page-hero__eyebrow">
+              Communications
+            </Typography>
+            <Typography variant="h4" component="h1" className="people-page-hero__title">
+              Email templates
+            </Typography>
+            <Typography variant="body2" className="people-page-hero__subtitle">
+              Manage reusable email templates and keep outbound messaging consistent.
+            </Typography>
+          </Box>
+          <Box className="people-page-hero__meta">
+            <Box className="people-page-hero__pill">Total <strong>{emails?.length || 0}</strong></Box>
+          </Box>
+        </Box>
+
+        <Box className="people-control-strip" sx={{ justifyContent: 'space-between', mb: 3 }}>
+         
            {detailLoading && <Skeleton/>}
            {updateLoading && <Skeleton/>}
            {loading ? <Skeleton width={'20%'} height={35}/>:
-           <Button variant='primary' className='btn btn-primary pull-right' onClick={handleShowCreate}>
-                Compose Email
+           <Button 
+             variant={isDarkMode ? 'light' : 'primary'} 
+             onClick={handleShowCreate}>
+                Create Email Template
             </Button>}
+        </Box>
+
             {deleteError && <Message variant='danger'>{deleteError}</Message>}
             {createError && <Message variant='danger'>{createError}</Message>}
             {updateError && <Message variant='danger'>{updateError}</Message>}
@@ -155,25 +164,79 @@ const EmailList = () => {
             {updateSuccess && <Message variant='success'>{"Updated Successfully"}</Message>}
             {loading ?
             <Skeleton width={'100%'} height={500}/>:
-                <MDBDataTableV5
-                    striped
-                    bordered
-                    hover
-                    entriesOptions={[5, 10, 20, 50]} entries={7} pagesAmount={4}
-                    data={data}
-                    searchTop 
-                    searchBottom={false}
-                    fullPagination
-                    >
-
-                </MDBDataTableV5>
+                <TableContainer
+                  component={Paper}
+                  className="people-table-shell"
+                  sx={{
+                    borderRadius: 0,
+                    background: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.9)',
+                    border: isDarkMode ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.06)',
+                    backdropFilter: 'blur(10px)'
+                  }}
+                >
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell sx={{ color: isDarkMode ? '#fff' : '#333', fontWeight: 'bold' }}>Subject</TableCell>
+                        <TableCell sx={{ color: isDarkMode ? '#fff' : '#333', fontWeight: 'bold' }} align="center">Actions</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {emails && emails.map((email) => (
+                        <TableRow key={email._id} hover>
+                          <TableCell sx={{ color: isDarkMode ? '#fff' : '#333' }}>
+                            {email.subject}
+                          </TableCell>
+                          <TableCell sx={{ color: isDarkMode ? '#fff' : '#333' }} align="center">
+                            <Tooltip title="Edit Email">
+                              <IconButton 
+                                color="primary" 
+                                onClick={() => handleShowEdit(email._id)}
+                                style={{ color: colors.text.primary }}
+                              >
+                                <EditIcon />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Delete Email">
+                              <IconButton 
+                                color="secondary" 
+                                onClick={() => handleDelete(email._id)}
+                                style={{ color: '#f56565' }}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
             }
-            <Modal show={showCreate} onHide={handleCloseCreate} size="lg" centered>
-                <Modal.Header closeButton>
-                <Modal.Title>Create Email</Modal.Title>
+            <Modal 
+              show={showCreate} 
+              onHide={handleCloseCreate} 
+              size="lg" 
+              centered
+              className={isDarkMode ? 'dark-modal' : ''}
+              style={{
+                '--bs-modal-bg': colors.surface,
+                '--bs-modal-color': colors.text.primary
+              }}>
+                <Modal.Header 
+                  closeButton
+                  style={{ 
+                    background: colors.surface, 
+                    color: colors.text.primary,
+                    borderBottom: `1px solid ${colors.border}`
+                  }}>
+                <Modal.Title style={{ color: colors.text.primary }}>Create Email</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Form style={{ padding: '5px'}} className="text-dark">
+                <Modal.Body style={{ 
+                  background: colors.surface, 
+                  color: colors.text.primary 
+                }}>
+                    <Form style={{ padding: '5px'}} className={isDarkMode ? "text-light" : "text-dark"}>
                             <Form.Group controlId="subject">
                                 <Form.Label>Subject</Form.Label>
                                 <Form.Control type="text" placeholder="Subject"
@@ -192,18 +255,37 @@ const EmailList = () => {
                     />
 
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleCreate}>
+                <Modal.Footer style={{ 
+                  background: colors.surface, 
+                  borderTop: `1px solid ${colors.border}` 
+                }}>
+                    <Button 
+                      variant={isDarkMode ? "light" : "primary"} 
+                      onClick={handleCreate}>
                         Save Email
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {email && email.subject && <Modal show={showEdit} onHide={handleCloseEdit} size="lg" centered>
-                <Modal.Header closeButton>
-                <Modal.Title>Update Email</Modal.Title>
+            {email && email.subject && <Modal 
+              show={showEdit} 
+              onHide={handleCloseEdit} 
+              size="lg" 
+              centered
+              className={isDarkMode ? 'dark-modal' : ''}>
+                <Modal.Header 
+                  closeButton
+                  style={{ 
+                    background: colors.surface, 
+                    color: colors.text.primary,
+                    borderBottom: `1px solid ${colors.border}`
+                  }}>
+                <Modal.Title style={{ color: colors.text.primary }}>Update Email</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Form style={{ padding: '5px'}} className="text-dark">
+                <Modal.Body style={{ 
+                  background: colors.surface, 
+                  color: colors.text.primary 
+                }}>
+                    <Form style={{ padding: '5px'}} className={isDarkMode ? "text-light" : "text-dark"}>
                             <Form.Group controlId="subject">
                                 <Form.Label>Subject</Form.Label>
                                 <Form.Control type="text" placeholder="Subject"
@@ -221,13 +303,18 @@ const EmailList = () => {
                     />
 
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={() => {handleUpdate(email._id)}}>
+                <Modal.Footer style={{ 
+                  background: colors.surface, 
+                  borderTop: `1px solid ${colors.border}` 
+                }}>
+                    <Button 
+                      variant={isDarkMode ? "light" : "primary"} 
+                      onClick={() => {handleUpdate(email._id)}}>
                         Update Email
                     </Button>
                 </Modal.Footer>
             </Modal>}
-        </div>
+              </Box>
     )
 }
  export default EmailList

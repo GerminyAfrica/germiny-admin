@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Image, Form, Button, Row, Col, CardColumns, Tabs, Tab, InputGroup} from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Card, Image, Row, Col } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Skeleton from 'react-loading-skeleton';
 import {getPatientDetails, listPatients} from '../actions/patientActions'
+import { useCustomTheme } from '../hooks/useCustomTheme'
+import './peoplePages.css'
 
 const PatientProfile = ({ match, history }) => {
   const patientId = match.params.id
@@ -23,6 +24,7 @@ const PatientProfile = ({ match, history }) => {
   const [rating, setRating] = useState('')
 
   const dispatch = useDispatch()
+  const { isDarkMode, colors } = useCustomTheme()
 
   const patientDetails = useSelector((state) => state.patientDetails)
   const { loading, error, patient } = patientDetails
@@ -61,189 +63,146 @@ const PatientProfile = ({ match, history }) => {
 
   return (
     <>
+            <div className={`people-detail-shell ${isDarkMode ? 'people-detail-shell--dark' : ''}`} style={{
+                color: colors.text.primary
+            }}>
         {error && <Message variant='danger'>{error}</Message>}
-        <Link to='/user' className='btn btn-light float-left'>
-            Back
-        </Link>
-        {next && <Link to={`/user/${next}/view`} className='btn btn-light float-right'>
-            <i className='fas fa-forward'></i>
-        </Link>}
-        {previous && <Link to={`/user/${previous}/view`} className='btn btn-light float-right'>
-            <i className='fas fa-backward'></i>
-        </Link>}
-        <div style={{padding:"5%"}}>
-            <CardColumns>
-                {loading ?
-                <Skeleton height={180} width={'80%'}/>:
-                <Card xs={6} md={4} className="text-dark" border="success" style={{ width: '80%'}}>
-                    <Card.Header><h6>Profile Picture</h6></Card.Header>
-                    <Row>
-                        <Col/>
-                        <Col xs={4} md={6}>
-                            {patient && patient.photo ?
-                            <Image style= {{padding:"5%", borderRadius:"50%"}} src={patient.photo} roundedCircle fluid/>:
-                            <Image style= {{padding:"5%", borderRadius:"50%"}} src={"https://res.cloudinary.com/germiny/image/upload/v1588101822/profile-pic_mebjxq.png"} roundedCircle fluid/>
-                            }
-                        </Col>
-                        <Col/>
-                    </Row>
-                </Card>}
-                {loading ?
-                <Skeleton width={'200%'} height={400}/>:
-                <Card border="dark" style={{ width: '200%' }} className="text-center text-dark">
-                    <Card.Header><h5>User Profile</h5></Card.Header>
-                    <Form style={{ padding: '10px'}} className="text-dark">
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId='firstname'>
-                                    <Form.Label>Firstname</Form.Label>
-                                    <Form.Control
-                                        type='firstname'
-                                        value={firstname}
-                                        onChange={(e) => setFirstname(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId='lastname'>
-                                    <Form.Label>Lastname</Form.Label>
-                                    <Form.Control
-                                        type='lastname'
-                                        value={lastname}
-                                        onChange={(e) => setLastname(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId='displayname'>
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control
-                                        type='displayname'
-                                        value={displayname}
-                                        onChange={(e) => setDisplayname(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId='phone'>
-                                    <Form.Label>Phone Number</Form.Label>
-                                    <Form.Control
-                                        type='phone'
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId='lastname'>
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type='email'
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId='dob'>
-                                    <Form.Label>Date of Birth</Form.Label>
-                                    <Form.Control
-                                        type='dob'
-                                        value={dob}
-                                        onChange={(e) => setDOB(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId='gender'>
-                                    <Form.Label>Gender</Form.Label>
-                                    <Form.Control
-                                        type='gender'
-                                        value={gender}
-                                        onChange={(e) => setGender(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId='height'>
-                                    <Form.Label>Height</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Append>
-                                        <InputGroup.Text>Meters</InputGroup.Text>
-                                        </InputGroup.Append>
-                                        <Form.Control
-                                            type='height'
-                                            value={height}
-                                            onChange={(e) => setHeight(e.target.value)}
-                                            readOnly>
-                                        </Form.Control>
-                                    </InputGroup>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId='weight'>
-                                    <Form.Label>Weight</Form.Label>
-                                    <InputGroup>
-                                        <InputGroup.Append>
-                                        <InputGroup.Text>Kg</InputGroup.Text>
-                                        </InputGroup.Append>
-                                        <Form.Control
-                                            type='weight'
-                                            value={weight}
-                                            onChange={(e) => setWeight(e.target.value)}
-                                            readOnly>
-                                        </Form.Control>
-                                    </InputGroup>
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Group controlId='genotype'>
-                                    <Form.Label>Genotype</Form.Label>
-                                    <Form.Control
-                                        type='genotyoe'
-                                        value={genotype}
-                                        onChange={(e) => setGenotype(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId='bloodgroup'>
-                                    <Form.Label>Blood Group</Form.Label>
-                                    <Form.Control
-                                        type='bloodgroup'
-                                        value={bloodgroup}
-                                        onChange={(e) => setBloodGroup(e.target.value)}
-                                        readOnly>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Form.Row>
-                    </Form>
-                
-                </Card>}
-            </CardColumns>
+                <div className="people-detail-shell__backbar">
+                    <Link to='/user' className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}>
+                        Back to users
+                    </Link>
+                    <div className="people-detail-actions">
+                        {previous && <Link to={`/user/${previous}/view`} className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}>
+                            <i className='fas fa-backward'></i>
+                        </Link>}
+                        {next && <Link to={`/user/${next}/view`} className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}>
+                            <i className='fas fa-forward'></i>
+                        </Link>}
+                    </div>
         </div>
-       
+
+                <div style={{ padding: '0 0 5%' }}>
+
+                    {loading ? (
+                        <>
+                            <Skeleton height={220} style={{ marginBottom: '1rem' }} />
+                            <Skeleton height={340} />
+                        </>
+                    ) : (
+                        <div className="patient-overview-grid">
+                            <Card
+                                className={`people-form-card patient-avatar-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                style={{
+                                    background: colors.card,
+                                    borderColor: colors.border
+                                }}
+                            >
+                                <Card.Body>
+                                    <div className="patient-avatar-wrap">
+                                        <Image
+                                            src={patient && patient.photo ? patient.photo : 'https://res.cloudinary.com/germiny/image/upload/v1588101822/profile-pic_mebjxq.png'}
+                                            roundedCircle
+                                            fluid
+                                            className="patient-avatar"
+                                        />
+                                    </div>
+                                    <h3 className="patient-name">{firstname || '--'} {lastname || ''}</h3>
+                                    <p className="patient-handle">@{displayname || 'unknown-user'}</p>
+
+                                    <div className="patient-vitals-strip">
+                                        <span className="patient-vital-chip">Gender: {gender || '--'}</span>
+                                        <span className="patient-vital-chip">DOB: {dob || '--'}</span>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+
+                            <Card
+                                className={`people-form-card patient-info-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                style={{
+                                    background: colors.card,
+                                    borderColor: colors.border
+                                }}
+                            >
+                                <Card.Header>
+                                    <h5 className="m-0">Personal Details</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    <div className="patient-info-grid">
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">First name</span>
+                                            <span className="patient-info-value">{firstname || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Last name</span>
+                                            <span className="patient-info-value">{lastname || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Username</span>
+                                            <span className="patient-info-value">{displayname || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Phone</span>
+                                            <span className="patient-info-value">{phone || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item patient-info-item--full">
+                                            <span className="patient-info-label">Email</span>
+                                            <span className="patient-info-value">{email || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Date of birth</span>
+                                            <span className="patient-info-value">{dob || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Rating</span>
+                                            <span className="patient-info-value">{rating || '--'}</span>
+                                        </div>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+
+                            <Card
+                                className={`people-form-card patient-info-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                style={{
+                                    background: colors.card,
+                                    borderColor: colors.border
+                                }}
+                            >
+                                <Card.Header>
+                                    <h5 className="m-0">Health Measurements</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Row>
+                                        <Col md={6}>
+                                            <div className="patient-metric-tile">
+                                                <div className="patient-metric-label">Height</div>
+                                                <div className="patient-metric-value">{height || '--'} <span>m</span></div>
+                                            </div>
+                                        </Col>
+                                        <Col md={6}>
+                                            <div className="patient-metric-tile">
+                                                <div className="patient-metric-label">Weight</div>
+                                                <div className="patient-metric-value">{weight || '--'} <span>kg</span></div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    <div className="patient-info-grid" style={{ marginTop: '0.9rem' }}>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Blood Group</span>
+                                            <span className="patient-info-value">{bloodgroup || '--'}</span>
+                                        </div>
+                                        <div className="patient-info-item">
+                                            <span className="patient-info-label">Genotype</span>
+                                            <span className="patient-info-value">{genotype || '--'}</span>
+                                        </div>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </div>
+                    )}
+        </div>
+            </div>
     </>
-     
+
   )
 }
 

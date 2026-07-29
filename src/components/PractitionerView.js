@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Image, Form, Button, ButtonGroup, Row, Col, CardColumns, Tabs, Tab, InputGroup, Modal} from 'react-bootstrap'
+import { Card, Image, Form, Button, ButtonGroup, Row, Col, Modal, Tabs, Tab } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { LinkContainer } from 'react-router-bootstrap'
 import Message from '../components/Message'
 import Skeleton from 'react-loading-skeleton';
 import {getPractitionerDetails, verifyPractitioner, deactivatePractitioner, activatePractitioner, invitePractitioner, declinePractitioner, rejectPractitioner, listPractitioners, profileUpdate} from '../actions/practitionerActions'
+import { useCustomTheme } from '../hooks/useCustomTheme'
+import './peoplePages.css'
 
 
 const PractitionerProfile = ({ match, history }) => {
@@ -41,6 +42,7 @@ const PractitionerProfile = ({ match, history }) => {
   const [channel, setChannel] = useState('')
 
   const dispatch = useDispatch()
+  const { isDarkMode, colors } = useCustomTheme()
 
 
   const practitionerDetails = useSelector((state) => state.practitionerDetails)
@@ -191,6 +193,7 @@ const PractitionerProfile = ({ match, history }) => {
 
   return (
     <>
+            <div className={`people-detail-shell ${isDarkMode ? 'people-detail-shell--dark' : ''}`} style={{ color: colors.text.primary }}>
         {loadingVerify && <Skeleton/>}
         {loadingDeactivate && <Skeleton/>}
         {loadingActivate && <Skeleton/>}
@@ -211,486 +214,272 @@ const PractitionerProfile = ({ match, history }) => {
         {decline && decline.message && <Message variant='success'>{decline.message}</Message>}
         {reject && reject.message && <Message variant='success'>{reject.message}</Message>}
 
-        <Link to='/practitioner' className='btn btn-light float-left'>
-            Back
+                <div className="people-detail-shell__backbar">
+                <Link to='/practitioner' className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}>
+            Back to practitioners
         </Link>
-        {next && <Link to={`/practitioner/${next}/view`} className='btn btn-light float-right'>
-            <i className='fas fa-forward'></i>
-        </Link>}
-        {previous && <Link to={`/practitioner/${previous}/view`} className='btn btn-light float-right'>
+        <div className="people-detail-actions">
+                {previous && <Link to={`/practitioner/${previous}/view`} className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}>
             <i className='fas fa-backward'></i>
         </Link>}
-        <div style={{padding:"3%"}}>
-            
-           {!loading && practitioner && (practitioner.status === 'New' || practitioner.status === 'Review') &&
-           <ButtonGroup className="me-2">
-               <Button variant='info' className='btn btn-primary' onClick={handleShowInvite}>
-                    Invite
-                </Button>
-                <Button variant='warning' className='btn btn-primary' onClick={handleShowDecline}>
-                    Decline
-                </Button>
-           </ButtonGroup>}
-                      
-           {!loading && practitioner && (practitioner.status === 'Invited' || practitioner.status === 'New' || practitioner.status === 'Review')  &&
-           <ButtonGroup>
-               <Button variant='primary' className='btn btn-primary' onClick={handleVerify}>
-                    Verify
-                </Button>
-                <Button variant='danger' className='btn btn-primary' onClick={handleShowReject}>
-                    Reject
-                </Button>
-           </ButtonGroup>}
-           
-           {!loading && practitioner && practitioner.status === 'Verified' && practitioner.active && <Button variant='warning' className='btn btn-primary pull-right' onClick={handleDeactivate}>
-                Deactivate
-            </Button>}
-
-           {!loading && practitioner && (practitioner.status === 'Deactivated' || practitioner.status === 'Expired') && <Button variant='success' className='btn btn-primary pull-right' onClick={handleActivate}>
-                Activate
-            </Button>}
+                {next && <Link to={`/practitioner/${next}/view`} className={`btn ${isDarkMode ? 'btn-light' : 'btn-dark'}`}>
+            <i className='fas fa-forward'></i>
+        </Link>}
         </div>
-        
-        <Tabs defaultActiveKey="profile">
-            <Tab eventKey="profile" title="Personal Information" style= {{padding:"1%"}}>
-                <CardColumns>
-                {loading ?
-                <Skeleton height={180} width={'80%'}/>:
-                    <Card xs={6} md={4} className="text-dark" border="success" style={{ width: '80%'}}>
-                        <Card.Header><h6>Profile Picture</h6></Card.Header>
-                        <Row>
-                            <Col/>
-                            <Col xs={4} md={6}>
-                                {practitioner && practitioner.photo ?
-                                <Image style= {{padding:"5%", borderRadius:"50%"}} src={practitioner.photo} roundedCircle fluid/>:
-                                <Image style= {{padding:"5%", borderRadius:"50%"}} src={"https://res.cloudinary.com/germiny/image/upload/v1588101822/profile-pic_mebjxq.png"} roundedCircle fluid/>
-                                }
-                            </Col>
-                            <Col/>
-                        </Row>
-                    </Card>}
-                    {loading ?
-                    <Skeleton width={'200%'} height={400}/>:
-                    <Card xs={6} md={4} border="dark" style={{ width: '200%' }} className="text-center text-dark">
-                        <Card.Header><h5>Practitioner Profile</h5></Card.Header>
-                        <Form style={{ padding: '10px'}} className="text-dark">
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId='firstname'>
-                                        <Form.Label>Firstname</Form.Label>
-                                        <Form.Control
-                                            type='firstname'
-                                            value={firstname}
-                                            onChange={(e) => setFirstname(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='lastname'>
-                                        <Form.Label>Lastname</Form.Label>
-                                        <Form.Control
-                                            type='lastname'
-                                            value={lastname}
-                                            onChange={(e) => setLastname(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='displayname'>
-                                        <Form.Label>Username</Form.Label>
-                                        <Form.Control
-                                            type='displayname'
-                                            value={displayname}
-                                            onChange={(e) => setDisplayname(e.target.value)}
-                                            readOnly>
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId='phone'>
-                                        <Form.Label>Phone Number</Form.Label>
-                                        <Form.Control
-                                            type='phone'
-                                            value={phone}
-                                            onChange={(e) => setPhone(e.target.value)}
-                                            readOnly>
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='lastname'>
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            type='email'
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId='dob'>
-                                        <Form.Label>Date of Birth</Form.Label>
-                                        <Form.Control
-                                            type='dob'
-                                            value={dob}
-                                            onChange={(e) => setDOB(e.target.value)}
-                                            placeholder='YYYY-MM-DD'
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='gender'>
-                                        <Form.Label>Gender</Form.Label>
-                                        <Form.Control
-                                            type='gender'
-                                            value={gender}
-                                            onChange={(e) => setGender(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            <Button variant='primary' onClick={updateProfile}>
-                                Update Profile
-                            </Button>
-                        </Form>
-                    
-                    </Card>}
-                </CardColumns>
+        </div>
+                <div style={{padding:"0 0 3%"}}>
+                    {!loading && practitioner && (
+                        <div className="people-detail-actions" style={{ marginBottom: '0.8rem', gap: '0.8rem' }}>
+                            {(practitioner.status === 'New' || practitioner.status === 'Review') &&
+                                <ButtonGroup className="people-detail-actions">
+                                    <Button variant='info' onClick={handleShowInvite}>
+                                        Invite
+                                    </Button>
+                                    <Button variant='warning' onClick={handleShowDecline}>
+                                        Decline
+                                    </Button>
+                                </ButtonGroup>
+                            }
 
-            </Tab>
-            <Tab eventKey="professional" title="Professional Information" style= {{padding:"1%"}}>
-                <CardColumns>
-                    {loading ?
-                    <Skeleton width={'80%'} height={250}/>:
-                        <Card xs={6} md={4} className="text-dark" border="success" style={{ width: '80%', padding:'2%'}}>
-                            <Card.Header><h6>Documents</h6></Card.Header>
-                            <Row>
-                            {practitioner && practitioner.doc && practitioner.doc.length > 0 && practitioner.doc.map(doc => (
-                                <Col key={doc.url}>
-                                    <h5 className="text-uppercase">{doc.name}</h5>
-                                    <a href={doc.url} target='_blank'>
-                                        <Button variant='secondary' className='btn-lg'>
-                                            {doc.url && doc.url.split('.')[3] === 'pdf'? <i className='fas fa-2x fa-file-pdf'></i>:
-                                            doc.url && doc.url.split('.')[3] === 'docx'? <i className='fas fa-2x fa-file-word'></i>:
-                                            doc.url && doc.url.split('.')[3] === 'ppt'? <i className='fas fa-2x fa-file-powerpoint'></i>:
-                                            doc.url && doc.url.split('.')[3] === 'jpg'? <i className='fas fa-2x fa-file-image'></i>:
-                                            doc.url && doc.url.split('.')[3] === 'png'? <i className='fas fa-2x fa-file-image'></i>:
-                                            <i className='fas fa-2x fa-file-alt'></i>}
-                                        </Button>
-                                    </a>
-                                </Col>
-                                
-                            ))}
-                            {practitioner && practitioner.doc && practitioner.doc.length === 0 && <h6>No Documents Uploaded</h6>}
-                            </Row>
-                        </Card>}
-                        {loading ?
-                        <Skeleton width={'200%'} height={300}/>:
-                        <Card xs={6} md={4} className=" text-center text-dark" border="dark" style={{ padding:'2%', width: '200%'}}>
-                          <Form style={{ padding: '10px'}} className="text-dark">
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId='practclass'>
-                                        <Form.Label>Practitioner Class</Form.Label>
-                                        <Form.Control
-                                            type='practclass'
-                                            value={practclass}
-                                            onChange={(e) => setPractClass(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='specialization'>
-                                        <Form.Label>Specialization</Form.Label>
-                                        <Form.Control
-                                            type='specialization'
-                                            value={specialization}
-                                            onChange={(e) => setSpecialization(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId='yearofgrad'>
-                                        <Form.Label>Year of Graduation</Form.Label>
-                                        <Form.Control
-                                            type='yearofgrad'
-                                            value={yearofgrad}
-                                            onChange={(e) => setYearOfGrad(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='yearofhouse'>
-                                        <Form.Label>Year of Housemanship</Form.Label>
-                                        <Form.Control
-                                            type='yearofhouse'
-                                            value={yearofhouse}
-                                            onChange={(e) => setYearOfHouse(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='yearofexp'>
-                                        <Form.Label>Years of Experience</Form.Label>
-                                        <InputGroup>
-                                            <InputGroup.Append>
-                                            <InputGroup.Text>Years</InputGroup.Text>
-                                            </InputGroup.Append>
-                                            <Form.Control
-                                                type='yearofexp'
-                                                value={yearofexp}
-                                                onChange={(e) => setYearOfExp(e.target.value)}
-                                                >
-                                            </Form.Control>
-                                        </InputGroup>
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            <Form.Row>
-                                <Col>
-                                    <Form.Group controlId='licenseNo'>
-                                        <Form.Label>License Number</Form.Label>
-                                        <Form.Control
-                                            type='licenseNo'
-                                            value={licenseNo}
-                                            onChange={(e) => setLicenseNo(e.target.value)}
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId='licenseExpire'>
-                                        <Form.Label>License Expiry Date</Form.Label>
-                                        <Form.Control
-                                            type='licenseExpire'
-                                            value={licenseExpire}
-                                            onChange={(e) => setLicenseExpire(e.target.value)}
-                                            placeholder='YYYY-MM-DD'
-                                            >
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                            </Form.Row>
-                            <Button variant='primary' onClick={updateProfile}>
-                                Update Profile
-                            </Button>
-                        </Form>
-                                
-                      </Card>}
-                    </CardColumns>
-              
-            </Tab>
-            <Tab eventKey="activity" title="Activities" style= {{padding:"1%"}}>
-            {loading ?
-            <Skeleton width={'100%'} height={400}/>:
-            <Card xs={6} md={4} className="text-dark" border="dark" style={{ padding:'2%'}}>
-              <Form style={{ padding: '10px'}} className="text-dark">
-                <Form.Row>
-                    <Col>
-                        <Form.Group controlId='verified'>
-                            <Form.Check
-                            type='checkbox'
-                            label='Verified'
-                            checked={verified}
-                            onChange={(e) => setVerified(e.target.checked)}
-                            disabled>
-                            </Form.Check>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='online'>
-                            <Form.Check
-                            type='checkbox'
-                            label='Online'
-                            checked={online}
-                            onChange={(e) => setOnline(e.target.checked)}
-                            disabled>
-                            </Form.Check>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='engaged'>
-                            <Form.Check
-                            type='checkbox'
-                            label='Engaged'
-                            checked={engaged}
-                            onChange={(e) => setEngaged(e.target.checked)}
-                            disabled>
-                            </Form.Check>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='active'>
-                            <Form.Check
-                            type='checkbox'
-                            label='Active'
-                            checked={active}
-                            onChange={(e) => setActive(e.target.checked)}
-                            disabled>
-                            </Form.Check>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-                <Form.Row>
-                    <Col>
-                        <Form.Group controlId='createdAt'>
-                        <Form.Label>Registration Date</Form.Label>
-                            <Form.Control
-                                type='createdAt'
-                                value={createdAt}
-                                onChange={(e) => setCreatedAt(e.target.value)}
-                                readOnly>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='channel'>
-                        <Form.Label>Registration Channel</Form.Label>
-                            <Form.Control
-                                type='channel'
-                                value={channel}
-                                onChange={(e) => setChannel(e.target.value)}
-                                readOnly>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
+                            {(practitioner.status === 'Invited' || practitioner.status === 'New' || practitioner.status === 'Review') &&
+                                <ButtonGroup className="people-detail-actions">
+                                    <Button variant='primary' onClick={handleVerify}>
+                                        Verify
+                                    </Button>
+                                    <Button variant='danger' onClick={handleShowReject}>
+                                        Reject
+                                    </Button>
+                                </ButtonGroup>
+                            }
 
-                </Form.Row>
-                <Form.Row>
-                    <Col>
-                        <Form.Group controlId='totaljobs'>
-                            <Form.Label>Total Number of Jobs</Form.Label>
-                            <Form.Control
-                                type='totaljobs'
-                                value={totaljobs}
-                                onChange={(e) => setTotalJobs(e.target.value)}
-                                readOnly>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='totalrejects'>
-                            <Form.Label>Total Number of Rejects</Form.Label>
-                            <Form.Control
-                                type='totalrejects'
-                                value={totalreject}
-                                onChange={(e) => setTotalReject(e.target.value)}
-                                readOnly>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='totalearned'>
-                            <Form.Label>Total Earned</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>NGN</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type='totalearned'
-                                    value={totalearned}
-                                    onChange={(e) => setTotalEarned(e.target.value)}
-                                    readOnly>
-                            </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-                <Form.Row>   
-                    <Col>
-                        <Form.Group controlId='wallet'>
-                            <Form.Label>Amount in Wallet</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>NGN</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type='wallet'
-                                    value={wallet}
-                                    onChange={(e) => setWallet(e.target.value)}
-                                    readOnly>
-                                </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='totaldistance'>
-                            <Form.Label>Total Distance</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>KM</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type='totaldistance'
-                                    value={totaldistance}
-                                    onChange={(e) => setTotalDistance(e.target.value)}
-                                    readOnly>
-                                </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='hoursonline'>
-                            <Form.Label>Hours Online</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>HOURS</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type='hoursonline'
-                                    value={hoursonline}
-                                    onChange={(e) => setHoursOnline(e.target.value)}
-                                    readOnly>
-                                </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-                <Form.Row>
-                    <Col>
-                        <Form.Group controlId='membershipclass'>
-                            <Form.Label>Membership Class</Form.Label>
-                            <Form.Control
-                                type='membershipclass'
-                                value={membershipclass}
-                                onChange={(e) => setMembershipClass(e.target.value)}
-                                readOnly>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId='rating'>
-                            <Form.Label>Average Rating</Form.Label>
-                            <Form.Control
-                                type='rating'
-                                value={rating}
-                                onChange={(e) => setRating(e.target.value)}
-                                readOnly>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-              </Form>
-              </Card>}
-            </Tab>
-        </Tabs>
+                            {practitioner.status === 'Verified' && practitioner.active && (
+                                <Button variant='warning' onClick={handleDeactivate}>
+                                    Deactivate
+                                </Button>
+                            )}
 
-        <Modal show={showInvite} onHide={handleCloseInvite} size="lg" centered>
+                            {(practitioner.status === 'Deactivated' || practitioner.status === 'Expired') && (
+                                <Button variant='success' onClick={handleActivate}>
+                                    Activate
+                                </Button>
+                            )}
+                        </div>
+                    )}
+
+                    {loading ? (
+                        <>
+                            <Skeleton height={230} style={{ marginBottom: '1rem' }} />
+                            <Skeleton height={500} />
+                        </>
+                    ) : (
+                        <Tabs defaultActiveKey="profile" className="people-detail-tabs">
+                            <Tab eventKey="profile" title="Personal Information" style={{ padding: '1% 0' }}>
+                                <div className="practitioner-overview-grid">
+                                    <Card
+                                        className={`people-form-card practitioner-avatar-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                        style={{ background: colors.card, borderColor: colors.border }}
+                                    >
+                                        <Card.Body>
+                                            <div className="patient-avatar-wrap">
+                                                <Image
+                                                    src={practitioner && practitioner.photo ? practitioner.photo : 'https://res.cloudinary.com/germiny/image/upload/v1588101822/profile-pic_mebjxq.png'}
+                                                    roundedCircle
+                                                    fluid
+                                                    className="patient-avatar"
+                                                />
+                                            </div>
+                                            <h3 className="patient-name">{firstname || '--'} {lastname || ''}</h3>
+                                            <p className="patient-handle">@{displayname || 'unknown-practitioner'}</p>
+                                            <div className="patient-vitals-strip">
+                                                <span className="patient-vital-chip">Status: {practitioner?.status || '--'}</span>
+                                                <span className="patient-vital-chip">Class: {practclass || '--'}</span>
+                                                <span className="patient-vital-chip">Specialty: {specialization || '--'}</span>
+                                            </div>
+                                        </Card.Body>
+                                    </Card>
+
+                                    <Card
+                                        className={`people-form-card practitioner-info-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                        style={{ background: colors.card, borderColor: colors.border }}
+                                    >
+                                        <Card.Header><h5 className="m-0">Personal Information</h5></Card.Header>
+                                        <Card.Body>
+                                            <Form className={isDarkMode ? 'text-light' : 'text-dark'}>
+                                                <Form.Row>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='firstname'>
+                                                            <Form.Label>Firstname</Form.Label>
+                                                            <Form.Control type='text' value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='lastname'>
+                                                            <Form.Label>Lastname</Form.Label>
+                                                            <Form.Control type='text' value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='displayname'>
+                                                            <Form.Label>Username</Form.Label>
+                                                            <Form.Control type='text' value={displayname} onChange={(e) => setDisplayname(e.target.value)} readOnly />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='phone'>
+                                                            <Form.Label>Phone Number</Form.Label>
+                                                            <Form.Control type='text' value={phone} onChange={(e) => setPhone(e.target.value)} readOnly />
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='email'>
+                                                            <Form.Label>Email</Form.Label>
+                                                            <Form.Control type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Form.Group controlId='dob'>
+                                                            <Form.Label>Date of Birth</Form.Label>
+                                                            <Form.Control type='text' value={dob} onChange={(e) => setDOB(e.target.value)} placeholder='YYYY-MM-DD' />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={3}>
+                                                        <Form.Group controlId='gender'>
+                                                            <Form.Label>Gender</Form.Label>
+                                                            <Form.Control type='text' value={gender} onChange={(e) => setGender(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Button variant='primary' onClick={updateProfile}>Update Profile</Button>
+                                            </Form>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            </Tab>
+
+                            <Tab eventKey="professional" title="Professional Information" style={{ padding: '1% 0' }}>
+                                <div className="practitioner-professional-grid">
+                                    <Card
+                                        className={`people-form-card practitioner-info-card practitioner-pro-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                        style={{ background: colors.card, borderColor: colors.border }}
+                                    >
+                                        <Card.Header><h5 className="m-0">Professional Information</h5></Card.Header>
+                                        <Card.Body>
+                                            <Form className={isDarkMode ? 'text-light' : 'text-dark'}>
+                                                <Form.Row>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='practclass'>
+                                                            <Form.Label>Practitioner Class</Form.Label>
+                                                            <Form.Control type='text' value={practclass} onChange={(e) => setPractClass(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='specialization'>
+                                                            <Form.Label>Specialization</Form.Label>
+                                                            <Form.Control type='text' value={specialization} onChange={(e) => setSpecialization(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Col md={4}>
+                                                        <Form.Group controlId='yearofgrad'>
+                                                            <Form.Label>Year of Graduation</Form.Label>
+                                                            <Form.Control type='text' value={yearofgrad} onChange={(e) => setYearOfGrad(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        <Form.Group controlId='yearofhouse'>
+                                                            <Form.Label>Year of Housemanship</Form.Label>
+                                                            <Form.Control type='text' value={yearofhouse} onChange={(e) => setYearOfHouse(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        <Form.Group controlId='yearofexp'>
+                                                            <Form.Label>Years of Experience</Form.Label>
+                                                            <Form.Control type='text' value={yearofexp} onChange={(e) => setYearOfExp(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='licenseNo'>
+                                                            <Form.Label>License Number</Form.Label>
+                                                            <Form.Control type='text' value={licenseNo} onChange={(e) => setLicenseNo(e.target.value)} />
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        <Form.Group controlId='licenseExpire'>
+                                                            <Form.Label>License Expiry Date</Form.Label>
+                                                            <Form.Control type='text' value={licenseExpire} onChange={(e) => setLicenseExpire(e.target.value)} placeholder='YYYY-MM-DD' />
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Button variant='primary' onClick={updateProfile}>Update Profile</Button>
+                                            </Form>
+                                        </Card.Body>
+                                    </Card>
+
+                                    <Card
+                                        className={`people-form-card practitioner-info-card practitioner-docs-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                        style={{ background: colors.card, borderColor: colors.border }}
+                                    >
+                                        <Card.Header><h5 className="m-0">Documents</h5></Card.Header>
+                                        <Card.Body>
+                                            {practitioner && practitioner.doc && practitioner.doc.length > 0 ? (
+                                                <div className="practitioner-docs-grid">
+                                                    {practitioner.doc.map((document) => (
+                                                        <a key={document.url} href={document.url} target='_blank' rel='noreferrer' className="practitioner-doc-tile">
+                                                            <div className="practitioner-doc-title">{document.name}</div>
+                                                            <div className="practitioner-doc-icon"><i className='fas fa-file-alt'></i></div>
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div className="patient-info-item patient-info-item--full">
+                                                    <span className="patient-info-value">No documents uploaded.</span>
+                                                </div>
+                                            )}
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            </Tab>
+
+                            <Tab eventKey="activity" title="Activities" style={{ padding: '1% 0' }}>
+                                <Card
+                                    className={`people-form-card practitioner-info-card ${isDarkMode ? 'text-light' : 'text-dark'}`}
+                                    style={{ background: colors.card, borderColor: colors.border }}
+                                >
+                                    <Card.Header><h5 className="m-0">Activity & Metrics</h5></Card.Header>
+                                    <Card.Body>
+                                        <div className="patient-vitals-strip" style={{ justifyContent: 'flex-start', marginBottom: '0.7rem' }}>
+                                            <span className="patient-vital-chip">Verified: {verified ? 'Yes' : 'No'}</span>
+                                            <span className="patient-vital-chip">Online: {online ? 'Yes' : 'No'}</span>
+                                            <span className="patient-vital-chip">Engaged: {engaged ? 'Yes' : 'No'}</span>
+                                            <span className="patient-vital-chip">Active: {active ? 'Yes' : 'No'}</span>
+                                        </div>
+                                        <div className="practitioner-metrics-grid">
+                                            <div className="patient-info-item"><span className="patient-info-label">Registration Date</span><span className="patient-info-value">{createdAt || '--'}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Registration Channel</span><span className="patient-info-value">{channel || '--'}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Total Jobs</span><span className="patient-info-value">{totaljobs || 0}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Total Rejects</span><span className="patient-info-value">{totalreject || 0}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Total Earned</span><span className="patient-info-value">NGN {totalearned || 0}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Wallet</span><span className="patient-info-value">NGN {wallet || 0}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Distance</span><span className="patient-info-value">{totaldistance || 0} km</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Hours Online</span><span className="patient-info-value">{hoursonline || 0} hrs</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Membership Class</span><span className="patient-info-value">{membershipclass || '--'}</span></div>
+                                            <div className="patient-info-item"><span className="patient-info-label">Average Rating</span><span className="patient-info-value">{rating || '--'}</span></div>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Tab>
+                        </Tabs>
+                    )}
+                </div>
+
+        <Modal show={showInvite} onHide={handleCloseInvite} size="lg" centered className="people-modal">
                 <Modal.Header closeButton>
                 <Modal.Title>Invite Practitioner</Modal.Title>
                 </Modal.Header>
@@ -737,7 +526,7 @@ const PractitionerProfile = ({ match, history }) => {
                     </Button>
                 </Modal.Footer>
         </Modal>
-        <Modal show={showDecline} onHide={handleCloseDecline} centered>
+        <Modal show={showDecline} onHide={handleCloseDecline} centered className="people-modal">
                 <Modal.Header closeButton>
                 <Modal.Title>Decline Practitioner</Modal.Title>
                 </Modal.Header>
@@ -760,7 +549,7 @@ const PractitionerProfile = ({ match, history }) => {
                     </Button>
                 </Modal.Footer>
         </Modal>
-        <Modal show={showReject} onHide={handleCloseReject} centered>
+        <Modal show={showReject} onHide={handleCloseReject} centered className="people-modal">
                 <Modal.Header closeButton>
                 <Modal.Title>Reject Practitioner</Modal.Title>
                 </Modal.Header>
@@ -783,6 +572,7 @@ const PractitionerProfile = ({ match, history }) => {
                     </Button>
                 </Modal.Footer>
         </Modal>
+            </div>
     </>
      
   )

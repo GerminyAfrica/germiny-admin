@@ -1,0 +1,531 @@
+/* Global Theme Styles */
+.dark-theme {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+  color: #f7fafc !important;
+}
+
+.light-theme {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  color: #2d3748 !important;
+}
+
+/* Bootstrap Modal Dark Theme */
+.dark-modal .modal-content {
+  background: rgba(45, 55, 72, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f7fafc !important;
+}
+
+.dark-modal .modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-modal .modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-modal .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Form Controls Dark Theme */
+.dark-theme .form-control {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .form-control:focus {
+  background: rgba(45, 55, 72, 0.9) !important;
+  border-color: #111111 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .form-control::placeholder {
+  color: #a0aec0 !important;
+}
+
+.dark-theme .form-label {
+  color: #e2e8f0 !important;
+}
+
+/* Card Dark Theme */
+.dark-theme .card {
+  background: rgba(45, 55, 72, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .card-header {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .card-footer {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f7fafc !important;
+}
+
+/* Alert Dark Theme */
+.dark-theme .alert {
+  background: rgba(45, 55, 72, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .alert-danger {
+  background: rgba(245, 101, 101, 0.2) !important;
+  border-color: #f56565 !important;
+  color: #fed7d7 !important;
+}
+
+.dark-theme .alert-success {
+  background: rgba(72, 187, 120, 0.2) !important;
+  border-color: #48bb78 !important;
+  color: #c6f6d5 !important;
+}
+
+.dark-theme .alert-warning {
+  background: rgba(237, 137, 54, 0.2) !important;
+  border-color: #ed8936 !important;
+  color: #ffeaa7 !important;
+}
+
+/* Button Dark Theme */
+.dark-theme .btn-primary {
+  background: linear-gradient(135deg, #111111 0%, #2f2f2f 100%) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.dark-theme .btn-primary:hover {
+  background: linear-gradient(135deg, #000000 0%, #202020 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-theme .btn-secondary {
+  background: rgba(74, 85, 104, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .btn-light {
+  background: rgba(247, 250, 252, 0.9) !important;
+  border: 1px solid rgba(247, 250, 252, 0.3) !important;
+  color: #2d3748 !important;
+}
+
+/* Table Dark Theme */
+.dark-theme .table {
+  color: #f7fafc !important;
+}
+
+.dark-theme .table td,
+.dark-theme .table th {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .table-striped tbody tr:nth-of-type(odd) {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-theme .table-hover tbody tr:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Draft.js Editor Dark Theme */
+.dark-theme .DraftEditor-root {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px;
+  padding: 15px;
+  color: #f7fafc !important;
+}
+
+.dark-theme .public-DraftEditor-content {
+  color: #f7fafc !important;
+}
+
+.dark-theme .rdw-editor-toolbar {
+  background: rgba(45, 55, 72, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-bottom: none !important;
+}
+
+.dark-theme .rdw-option-wrapper {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .rdw-option-wrapper:hover {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Tabs Dark Theme */
+.dark-theme .nav-tabs {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .nav-tabs .nav-link {
+  color: #a0aec0 !important;
+  border: 1px solid transparent !important;
+}
+
+.dark-theme .nav-tabs .nav-link:hover {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .nav-tabs .nav-link.active {
+  background: rgba(45, 55, 72, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: transparent !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .tab-content {
+  background: rgba(45, 55, 72, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-top: none !important;
+}
+
+/* Skeleton Dark Theme */
+.dark-theme .react-loading-skeleton {
+  background: rgba(45, 55, 72, 0.8) !important;
+  background-image: linear-gradient(
+    90deg,
+    rgba(45, 55, 72, 0.8) 0px,
+    rgba(74, 85, 104, 0.8) 40px,
+    rgba(45, 55, 72, 0.8) 80px
+  ) !important;
+}
+
+/* Scrollbar Dark Theme */
+.dark-theme::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-theme::-webkit-scrollbar-track {
+  background: rgba(45, 55, 72, 0.5);
+}
+
+.dark-theme::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+.dark-theme::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Glassmorphism Effects */
+.glass-effect {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .glass-effect {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dark-theme .hover-lift:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Text Selection */
+.dark-theme ::selection {
+  background: rgba(0, 0, 0, 0.3);
+  color: #f7fafc;
+}
+
+.light-theme ::selection {
+  background: rgba(0, 0, 0, 0.2);
+  color: #2d3748;
+}
+
+/* Sidebar and Header Text Fixes */
+.light-theme .sidebar .nav-link {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.light-theme .sidebar .nav-link:hover {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
+.light-theme .sidebar .brand-title {
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.light-theme .navbar .nav-link {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.light-theme .navbar .nav-link:hover {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
+.light-theme .navbar .navbar-brand {
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.dark-theme .sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.dark-theme .sidebar .nav-link:hover {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+.dark-theme .sidebar .brand-title {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark-theme .navbar .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.dark-theme .navbar .nav-link:hover {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+.dark-theme .navbar .navbar-brand {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Material-UI Typography Theme Fixes */
+.light-theme .MuiTypography-root {
+  color: #2d3748 !important;
+}
+
+.dark-theme .MuiTypography-root {
+  color: #f7fafc !important;
+}
+
+/* Sidebar Status Text */
+.light-theme .sidebar-status {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-theme .status-text {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.dark-theme .sidebar-status {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .status-text {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Navigation Active States */
+.light-theme .nav-link.active {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #111111 !important;
+}
+
+.dark-theme .nav-link.active {
+  background: rgba(0, 0, 0, 0.2) !important;
+  color: #3f3f3f !important;
+}
+
+/* Dashboard Text Visibility Fixes */
+.light-theme .modern-dashboard .MuiTypography-root {
+  color: #2d3748 !important;
+}
+
+.dark-theme .modern-dashboard .MuiTypography-root {
+  color: #f7fafc !important;
+}
+
+.light-theme .modern-dashboard .MuiTypography-colorTextSecondary {
+  color: #718096 !important;
+}
+
+.dark-theme .modern-dashboard .MuiTypography-colorTextSecondary {
+  color: #a0aec0 !important;
+}
+
+/* Chart Legend Text */
+.light-theme .legend {
+  color: #2d3748 !important;
+}
+
+.dark-theme .legend {
+  color: #f7fafc !important;
+}
+
+/* Chartist Chart Text */
+.light-theme .ct-label {
+  color: #2d3748 !important;
+}
+
+.dark-theme .ct-label {
+  color: #f7fafc !important;
+}
+
+/* Stats Card Text */
+.light-theme .stats-card .MuiTypography-root {
+  color: #2d3748 !important;
+}
+
+.dark-theme .stats-card .MuiTypography-root {
+  color: #f7fafc !important;
+}
+
+/* Chart Card Text */
+.light-theme .chart-card .MuiTypography-root {
+  color: #2d3748 !important;
+}
+
+.dark-theme .chart-card .MuiTypography-root {
+  color: #f7fafc !important;
+}
+
+/* Chip Component Text */
+.light-theme .MuiChip-root {
+  color: #2d3748 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark-theme .MuiChip-root {
+  color: #f7fafc !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Chartist Dark Mode Improvements */
+.dark-theme .ct-chart {
+  color: #f7fafc !important;
+}
+
+.dark-theme .ct-chart .ct-label {
+  color: #f7fafc !important;
+  fill: #f7fafc !important;
+}
+
+.dark-theme .ct-chart .ct-grid {
+  stroke: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark-theme .ct-chart .ct-series-a .ct-line {
+  stroke: #111111 !important;
+}
+
+.dark-theme .ct-chart .ct-series-a .ct-point {
+  stroke: #111111 !important;
+}
+
+.dark-theme .ct-chart .ct-series-b .ct-line {
+  stroke: #4CAF50 !important;
+}
+
+.dark-theme .ct-chart .ct-series-b .ct-point {
+  stroke: #4CAF50 !important;
+}
+
+.dark-theme .ct-chart .ct-series-c .ct-line {
+  stroke: #5f5f5f !important;
+}
+
+.dark-theme .ct-chart .ct-series-c .ct-point {
+  stroke: #5f5f5f !important;
+}
+
+/* Dashboard Container Dark Mode */
+.dark-theme .dashboard-container {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+  color: #f7fafc !important;
+}
+
+.dark-theme .dashboard-container * {
+  color: inherit !important;
+}
+
+/* Typography Color Override for Dark Mode */
+.dark-theme .MuiTypography-body1,
+.dark-theme .MuiTypography-body2,
+.dark-theme .MuiTypography-subtitle1,
+.dark-theme .MuiTypography-subtitle2,
+.dark-theme .MuiTypography-caption {
+  color: #f7fafc !important;
+}
+
+.dark-theme .MuiTypography-h1,
+.dark-theme .MuiTypography-h2,
+.dark-theme .MuiTypography-h3,
+.dark-theme .MuiTypography-h4,
+.dark-theme .MuiTypography-h5,
+.dark-theme .MuiTypography-h6 {
+  color: #f7fafc !important;
+}
+
+/* Paper Component Dark Mode */
+.dark-theme .MuiPaper-root {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #f7fafc !important;
+}
+
+/* Box Component Dark Mode */
+.dark-theme .MuiBox-root {
+  color: #f7fafc !important;
+}
+
+/* Icon Button Dark Mode */
+.dark-theme .MuiIconButton-root {
+  color: #f7fafc !important;
+}
+
+/* Tooltip Dark Mode */
+.dark-theme .MuiTooltip-tooltip {
+  background: rgba(45, 55, 72, 0.95) !important;
+  color: #f7fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Linear Progress Dark Mode */
+.dark-theme .MuiLinearProgress-root {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .MuiLinearProgress-bar {
+  background: linear-gradient(45deg, #111111, #2f2f2f) !important;
+}
